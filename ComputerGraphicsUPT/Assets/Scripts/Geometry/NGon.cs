@@ -21,8 +21,8 @@ public class NGon : MonoBehaviour
 
         //verts[0] = new Vector3(0, 0, 0);//first vertex
         //Vector3 center = verts[0];
-        Debug.Log(verts.Length);
-        Debug.Log(numOfSides);
+        //Debug.Log(verts.Length);
+        //Debug.Log(numOfSides);
 
         for (int i = 0; i < verts.Length; i++)
         {

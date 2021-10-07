@@ -27,7 +27,7 @@ public class ColorModifier : MonoBehaviour
         //a = _color.a;
         //Debug.Log(a);
         mesh.material.SetColor("_BaseColor", _color);
-        Debug.Log(_color.a);
+        //Debug.Log(_color.a);
 
         //texture
         //mesh.material.EnableKeyword("_MAINTEX");

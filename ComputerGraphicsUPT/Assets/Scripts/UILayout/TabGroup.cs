@@ -10,35 +10,39 @@ public class TabGroup : MonoBehaviour
     public GameObject[] panels;
     public Button[] buttons;
     //int[] arPanels;
-    int panel;
-    int curTab = 0;
+    //int panel;
+    //int curTab = 0;
     int lastTab = 0;
-    int buttonIndex = 0;
+    //int buttonIndex = 0;
 
     private void Start()
     {
         for(int i = 0; i < buttons.Length; i++)
         {
             Button btn = buttons[i].GetComponent<Button>();
-            buttonIndex = i;
-            Debug.Log("Button selected: " + buttonIndex);
-            btn.onClick.AddListener(TaskOnClick);
+            //buttonIndex = i;
+            //Debug.Log("Button selected: " + buttonIndex);
+
+
+            int buttonNumber = i;
+            btn.onClick.AddListener(
+                () =>
+                {
+                    //Debug.Log(buttonNumber);
+                    ShowTab(buttonNumber);
+                    
+                }
+                );
         }
         
-    }
-
-    void TaskOnClick()
-    {
-        Debug.Log("You have clicked button");
-        ShowTab(buttonIndex);
     }
 
     void ShowTab(int tabIndex)
     {
         for (int i = 0; i < panels.Length; i++)
         {
-            Debug.Log("i: " + i);
-            Debug.Log("tabIndex: " + tabIndex);
+            //Debug.Log("i: " + i);
+            //Debug.Log("tabIndex: " + tabIndex);
             if (i == tabIndex)
             {
                 try
@@ -51,7 +55,7 @@ public class TabGroup : MonoBehaviour
 
                     //update last opened Tab
                     lastTab = i;
-                    Debug.Log("lastTab: " + lastTab);
+                    //Debug.Log("lastTab: " + lastTab);
                 }
                 //If the index is out of bounds, throw an IndexOutOfRangeException
                 catch(IndexOutOfRangeException ex)
@@ -67,18 +71,6 @@ public class TabGroup : MonoBehaviour
     private void show(int tabIndex)
     {
         panels[tabIndex].SetActive(true);
-    }
-
-    void ShowTab(RectTransform tab)
-    {
-        //Shows the tab given by reference
-        
-
-        //The tab must be a part of the tab group to be shown
-        //If it is not, throw an ArgumentException
-
-        //Hides the previously shown tab, if any
-
     }
 
     void HideTab()

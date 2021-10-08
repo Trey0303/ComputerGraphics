@@ -5,6 +5,8 @@
 /// </summary>
 public class KinematicPlayerMotor : MonoBehaviour, IKinematicMotor
 {
+    public Animator anims;
+
     [Header("Body")]
     public KinematicBody body;
     
@@ -21,6 +23,12 @@ public class KinematicPlayerMotor : MonoBehaviour, IKinematicMotor
     
     public bool Grounded { get; private set; }
     private bool wasGrounded;
+
+    public float speed = 0;
+    public float maxSpeed = 2;
+
+    public float maxTurnRate = 8;
+
     
     [Header("Air Movement")]
     public float airAccel = 50.0f;
@@ -76,6 +84,7 @@ public class KinematicPlayerMotor : MonoBehaviour, IKinematicMotor
                 jumpedThisFrame = true;
 
                 velocity.y += Mathf.Sqrt(-2.0f * body.EffectiveGravity.y * jumpHeight);
+
             }
         }
         
@@ -83,6 +92,9 @@ public class KinematicPlayerMotor : MonoBehaviour, IKinematicMotor
 
         float effectiveAccel = (isGrounded ? groundAccel : airAccel);
         float effectiveFriction = (isGrounded ? groundFriction : airFriction);
+
+        Debug.Log(isGrounded);
+        anims.SetBool("Grounded", isGrounded);
         
         // apply friction
         float keepY = velocity.y;
@@ -92,7 +104,10 @@ public class KinematicPlayerMotor : MonoBehaviour, IKinematicMotor
         {
             float frictionAccel = prevSpeed * effectiveFriction * Time.deltaTime;
             velocity *= Mathf.Max(prevSpeed - frictionAccel, 0) / prevSpeed;
+            
+            
         }
+        
 
         velocity.y = keepY;
 
@@ -100,12 +115,41 @@ public class KinematicPlayerMotor : MonoBehaviour, IKinematicMotor
         moveWish = Vector3.ClampMagnitude(moveWish, 1);
         float velocityProj = Vector3.Dot(velocity, moveWish);
         float accelMag = effectiveAccel * Time.deltaTime;
+        
 
         // clamp projection onto movement vector
+        //Debug.Log(velocityProj + accelMag > moveSpeed);
         if (velocityProj + accelMag > moveSpeed)
         {
             accelMag = moveSpeed - velocityProj;
+
+            //transform.Rotate(transform.position, maxTurnRate, Space.World);
+
+            //animator float speed check
+            if(speed < maxSpeed)
+            {
+                speed = speed + .1f ;
+            }
+            
         }
+        else
+        {//animator float speed check
+            if (speed > .1)
+            {
+                speed = speed - .5f;
+            }
+            else
+            {
+                speed = 0;
+            }
+        }
+
+        //Debug.Log(speed);
+
+        //send current speed to animator
+        anims.SetFloat("Speed", speed);
+
+        //anims.SetFloat("Speed", moveSpeed);
 
         return velocity + (moveWish * accelMag);
     }
@@ -113,7 +157,8 @@ public class KinematicPlayerMotor : MonoBehaviour, IKinematicMotor
     public void OnMoveHit(ref Vector3 curPosition, ref Vector3 curVelocity, Collider other, Vector3 direction, float pen)
     {
         Vector3 clipped = ClipVelocity(curVelocity, direction);
-        
+
+
         // floor
         if (groundLayers.Test(other.gameObject.layer) &&  // require ground layer
             direction.y > 0 &&                                      // direction check
@@ -131,6 +176,8 @@ public class KinematicPlayerMotor : MonoBehaviour, IKinematicMotor
             curPosition += direction * (pen);
             curVelocity = clipped;
         }
+        //Debug.Log(curVelocity.magnitude);
+        //anims.SetFloat("Speed", curVelocity.magnitude);
     }
 
     public void OnPreMove()

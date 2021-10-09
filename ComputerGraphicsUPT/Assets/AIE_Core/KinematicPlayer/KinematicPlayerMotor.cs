@@ -5,7 +5,7 @@
 /// </summary>
 public class KinematicPlayerMotor : MonoBehaviour, IKinematicMotor
 {
-    public Animator anims;
+    //public Animator anims;
 
     [Header("Body")]
     public KinematicBody body;
@@ -93,8 +93,8 @@ public class KinematicPlayerMotor : MonoBehaviour, IKinematicMotor
         float effectiveAccel = (isGrounded ? groundAccel : airAccel);
         float effectiveFriction = (isGrounded ? groundFriction : airFriction);
 
-        Debug.Log(isGrounded);
-        anims.SetBool("Grounded", isGrounded);
+        //Debug.Log(isGrounded);
+        
         
         // apply friction
         float keepY = velocity.y;
@@ -147,7 +147,7 @@ public class KinematicPlayerMotor : MonoBehaviour, IKinematicMotor
         //Debug.Log(speed);
 
         //send current speed to animator
-        anims.SetFloat("Speed", speed);
+        
 
         //anims.SetFloat("Speed", moveSpeed);
 

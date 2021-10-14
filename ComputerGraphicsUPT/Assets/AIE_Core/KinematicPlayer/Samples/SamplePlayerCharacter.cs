@@ -25,16 +25,23 @@ public class SamplePlayerCharacter : MonoBehaviour
         // send inputs to motor
         motor.MoveInput(new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical")));
         
-        rb.rotation = Quaternion.LookRotation(-new Vector3(motor.body.Velocity.x, 0.0f, motor.body.Velocity.z) * maxTurnRate);
+        //this is not needed if you want backwards/strafing animations
+        //rb.rotation = Quaternion.LookRotation(new Vector3(motor.body.Velocity.x, 0.0f, motor.body.Velocity.z) * maxTurnRate);
 
-        Vector3 localVel = transform.TransformDirection(motor.body.Velocity);
+        Vector3 localVel = transform.InverseTransformVector(motor.body.Velocity);
 
+        float localVelY = 0;
+
+        //strafe
         float localVelX = localVel.x;
+        //forward/-forward
         float localVelZ = localVel.z;
 
+        Vector3 localDirection = new Vector3(localVelX, localVelY, localVelZ);
         
-        Debug.Log(localVelX);
-        Debug.Log(localVelZ);
+        //Debug.Log("X: " + localDirection.x);
+        //Debug.Log("Y: " + localDirection.y);
+        //Debug.Log("Z: " + localDirection.z);
 
         //motor.body.Velocity.x = transform.Rotate(new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, 0.0f) * maxTurnRate);
         //motor.body.Velocity.z = transform.Rotate(new Vector3(0.0f, 0.0f, Input.GetAxisRaw("Vertical")) * maxTurnRate);
@@ -48,8 +55,8 @@ public class SamplePlayerCharacter : MonoBehaviour
 
         anims.SetBool("Grounded", motor.Grounded);
         anims.SetFloat("Speed", motor.speed);
-        anims.SetFloat("LocalVelX", localVelX);
-        anims.SetFloat("LocalVelZ", localVelZ);
+        anims.SetFloat("LocalVelX", localDirection.x);
+        anims.SetFloat("LocalVelZ", localDirection.z);
 
     }
 }

@@ -3005,6 +3005,7 @@ MonoBehaviour:
   anims: {fileID: 692485403}
   rb: {fileID: 224987250}
   maxTurnRate: 8
+  dance: 0
 --- !u!114 &224987248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3709,7 +3710,7 @@ Transform:
   m_LocalScale: {x: 12.868245, y: 9.559603, z: 14.591302}
   m_Children: []
   m_Father: {fileID: 1598819384}
-  m_RootOrder: 88
+  m_RootOrder: 81
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!64 &249579850
 MeshCollider:
@@ -5423,7 +5424,7 @@ Transform:
   m_LocalScale: {x: 16.153284, y: 12, z: 18.316206}
   m_Children: []
   m_Father: {fileID: 1598819384}
-  m_RootOrder: 74
+  m_RootOrder: 72
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &361365677
 BoxCollider:
@@ -8748,7 +8749,7 @@ Transform:
   m_LocalScale: {x: 16.153284, y: 12, z: 18.316206}
   m_Children: []
   m_Father: {fileID: 1598819384}
-  m_RootOrder: 72
+  m_RootOrder: 70
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &550900283
 BoxCollider:
@@ -14889,7 +14890,7 @@ Transform:
   m_LocalScale: {x: 16.153284, y: 12, z: 70.35068}
   m_Children: []
   m_Father: {fileID: 1598819384}
-  m_RootOrder: 93
+  m_RootOrder: 89
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &963586265
 BoxCollider:
@@ -15743,7 +15744,7 @@ Transform:
   - {fileID: 1936792221}
   - {fileID: 698882986}
   m_Father: {fileID: 1598819384}
-  m_RootOrder: 84
+  m_RootOrder: 80
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &999831024
 BoxCollider:
@@ -15789,7 +15790,7 @@ Transform:
   m_LocalScale: {x: 12.868245, y: 9.559603, z: 14.591302}
   m_Children: []
   m_Father: {fileID: 1598819384}
-  m_RootOrder: 90
+  m_RootOrder: 83
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!64 &1002158016
 MeshCollider:
@@ -18226,7 +18227,7 @@ Transform:
   m_LocalScale: {x: 16.153284, y: 12, z: 18.316206}
   m_Children: []
   m_Father: {fileID: 1598819384}
-  m_RootOrder: 75
+  m_RootOrder: 73
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1146096006
 BoxCollider:
@@ -19195,7 +19196,7 @@ Transform:
   m_LocalScale: {x: 71.089966, y: 12.046132, z: 70.57491}
   m_Children: []
   m_Father: {fileID: 1598819384}
-  m_RootOrder: 92
+  m_RootOrder: 88
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1191139300
 BoxCollider:
@@ -21562,7 +21563,7 @@ Transform:
   m_LocalScale: {x: 12.868245, y: 9.559603, z: 14.591302}
   m_Children: []
   m_Father: {fileID: 1598819384}
-  m_RootOrder: 89
+  m_RootOrder: 82
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!64 &1299138628
 MeshCollider:
@@ -25667,31 +25668,31 @@ Transform:
   - {fileID: 1171350598}
   - {fileID: 321811729}
   - {fileID: 387641577}
-  - {fileID: 2056528157}
-  - {fileID: 641953004}
   - {fileID: 550900282}
   - {fileID: 2124018527}
   - {fileID: 361365676}
   - {fileID: 1146096005}
+  - {fileID: 2056528157}
+  - {fileID: 641953004}
   - {fileID: 521331207}
   - {fileID: 73787610}
   - {fileID: 307960413}
   - {fileID: 824383131}
-  - {fileID: 1486248077}
-  - {fileID: 1830708161}
-  - {fileID: 1657598429}
-  - {fileID: 857545416}
   - {fileID: 999831023}
-  - {fileID: 864447734}
-  - {fileID: 1594639928}
-  - {fileID: 192305541}
   - {fileID: 249579849}
   - {fileID: 1299138627}
   - {fileID: 1002158015}
-  - {fileID: 1947409124}
+  - {fileID: 1486248077}
+  - {fileID: 1830708161}
+  - {fileID: 1594639928}
+  - {fileID: 857545416}
   - {fileID: 1191139299}
   - {fileID: 963586264}
+  - {fileID: 1657598429}
   - {fileID: 2113305290}
+  - {fileID: 864447734}
+  - {fileID: 1947409124}
+  - {fileID: 192305541}
   m_Father: {fileID: 2041067163}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -33263,7 +33264,7 @@ Transform:
   m_LocalScale: {x: 17.91886, y: 12, z: 48.514793}
   m_Children: []
   m_Father: {fileID: 1598819384}
-  m_RootOrder: 94
+  m_RootOrder: 91
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2113305291
 BoxCollider:
@@ -33373,7 +33374,7 @@ Transform:
   m_LocalScale: {x: 16.153284, y: 12, z: 18.316206}
   m_Children: []
   m_Father: {fileID: 1598819384}
-  m_RootOrder: 73
+  m_RootOrder: 71
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2124018528
 BoxCollider:

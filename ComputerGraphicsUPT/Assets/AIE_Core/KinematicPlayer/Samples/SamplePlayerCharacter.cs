@@ -20,13 +20,19 @@ public class SamplePlayerCharacter : MonoBehaviour
 
     public float maxTurnRate = 8;
 
+    public bool dance = false;
+
     private void Update()
     {
         // send inputs to motor
         motor.MoveInput(new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical")));
-        
+
         //this is not needed if you want backwards/strafing animations
-        //rb.rotation = Quaternion.LookRotation(new Vector3(motor.body.Velocity.x, 0.0f, motor.body.Velocity.z) * maxTurnRate);
+        if (new Vector3(motor.body.Velocity.x, 0.0f, motor.body.Velocity.z) != Vector3.zero)//this if statements prevents unnessessary rotation
+        {
+            rb.rotation = Quaternion.LookRotation(new Vector3(motor.body.Velocity.x, 0.0f, motor.body.Velocity.z) * maxTurnRate);
+
+        }
 
         Vector3 localVel = transform.InverseTransformVector(motor.body.Velocity);
 
@@ -43,9 +49,6 @@ public class SamplePlayerCharacter : MonoBehaviour
         //Debug.Log("Y: " + localDirection.y);
         //Debug.Log("Z: " + localDirection.z);
 
-        //motor.body.Velocity.x = transform.Rotate(new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, 0.0f) * maxTurnRate);
-        //motor.body.Velocity.z = transform.Rotate(new Vector3(0.0f, 0.0f, Input.GetAxisRaw("Vertical")) * maxTurnRate);
-
         //Debug.Log(localVel);
 
         if (Input.GetButtonDown("Jump"))
@@ -53,10 +56,25 @@ public class SamplePlayerCharacter : MonoBehaviour
             motor.JumpInput();
         }
 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (dance)
+            {
+                dance = false;
+                Debug.Log("NOT dancing");
+            }
+            else if (!dance)
+            {
+                dance = true;
+                Debug.Log("dancing");
+            }
+        }
+
         anims.SetBool("Grounded", motor.Grounded);
         anims.SetFloat("Speed", motor.speed);
         anims.SetFloat("LocalVelX", localDirection.x);
         anims.SetFloat("LocalVelZ", localDirection.z);
+        anims.SetBool("Dance", dance);
 
     }
 }

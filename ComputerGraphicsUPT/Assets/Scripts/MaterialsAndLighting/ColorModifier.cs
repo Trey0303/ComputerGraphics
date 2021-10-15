@@ -6,7 +6,6 @@ public class ColorModifier : MonoBehaviour
 {
     MeshRenderer mesh;
 
-
     public Color _color;
 
     //public float a;
@@ -37,8 +36,6 @@ public class ColorModifier : MonoBehaviour
         mesh.material.SetTexture("_BaseMap", mainTexture);
         mesh.material.SetTexture("_BumpMap", normal);
         mesh.material.SetTexture("_MetallicGlossMap", metal);
-
-
     }
 
     // Update is called once per frame

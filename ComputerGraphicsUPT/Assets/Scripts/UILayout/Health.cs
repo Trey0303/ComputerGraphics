@@ -36,8 +36,8 @@ public class Health : MonoBehaviour
     //damage is applied to curHealth
     public void TakeDamage(float damage)
     {
-        Debug.Log("took damage");
-        Debug.Log("Damage: " + (damage));
+        //Debug.Log("took damage");
+        //Debug.Log("Damage: " + (damage));
         curHealth = curHealth - damage;
         // invoke the event with the health taken
         OnHealthChanged.Invoke(curHealth);//tells OnHealthChange that a change to curHealth has occured

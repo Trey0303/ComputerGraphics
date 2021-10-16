@@ -3,11 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 /// <summary>
 /// Sample character script demonstrating how to send inputs to a motor
 /// </summary>
 public class SamplePlayerCharacter : MonoBehaviour
 {
+    public GameObject ui;
+
+    private GrabRange grabRange;
+
     // The motor we're controlling
     public KinematicPlayerMotor motor;
 
@@ -22,10 +28,23 @@ public class SamplePlayerCharacter : MonoBehaviour
 
     public bool dance = false;
 
+    public bool uiActive = false;
+
+
+    void Start()
+    {
+        ui.SetActive(uiActive);
+    }
+
     private void Update()
     {
+
         // send inputs to motor
-        motor.MoveInput(new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical")));
+        if (uiActive == false)////If game NOT Paused
+        {
+            motor.MoveInput(new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical")));
+
+        }
 
         //this is not needed if you want backwards/strafing animations
         if (new Vector3(motor.body.Velocity.x, 0.0f, motor.body.Velocity.z) != Vector3.zero)//this if statements prevents unnessessary rotation
@@ -44,37 +63,71 @@ public class SamplePlayerCharacter : MonoBehaviour
         float localVelZ = localVel.z;
 
         Vector3 localDirection = new Vector3(localVelX, localVelY, localVelZ);
-        
+
         //Debug.Log("X: " + localDirection.x);
         //Debug.Log("Y: " + localDirection.y);
         //Debug.Log("Z: " + localDirection.z);
 
         //Debug.Log(localVel);
 
-        if (Input.GetButtonDown("Jump"))
+        //player controls
+        if (uiActive == false)//If game NOT Paused
         {
-            motor.JumpInput();
+            if (Input.GetButtonDown("Jump"))
+            {
+                motor.JumpInput();
+            }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                if (dance)
+                {
+                    dance = false;
+                    //Debug.Log("NOT dancing");
+                }
+                else if (!dance)
+                {
+                    dance = true;
+                    //Debug.Log("dancing");
+                }
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+        //if (uiActive == true)//if game IS paused
+        //{
+        //    if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A))
+        //    {
+
+        //    }
+        //}
+
+        //pause menu
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (dance)
+            uiActive = !uiActive;
+            ui.SetActive(uiActive);
+
+            if (uiActive == false)//resumeGame
             {
-                dance = false;
-                Debug.Log("NOT dancing");
+                Time.timeScale = 1;
             }
-            else if (!dance)
+            else//pauseGame
             {
-                dance = true;
-                Debug.Log("dancing");
+                Time.timeScale = 0;
             }
         }
 
-        anims.SetBool("Grounded", motor.Grounded);
-        anims.SetFloat("Speed", motor.speed);
-        anims.SetFloat("LocalVelX", localDirection.x);
-        anims.SetFloat("LocalVelZ", localDirection.z);
-        anims.SetBool("Dance", dance);
+        if (anims != null)
+        {
 
+            anims.SetBool("Grounded", motor.Grounded);
+            anims.SetFloat("Speed", motor.speed);
+            anims.SetFloat("LocalVelX", localDirection.x);
+            anims.SetFloat("LocalVelZ", localDirection.z);
+            anims.SetBool("Dance", dance);
+
+
+
+        }
     }
 }

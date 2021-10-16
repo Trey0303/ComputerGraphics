@@ -105,7 +105,7 @@ public class KinematicBody : MonoBehaviour
     public Collider[] Overlap(Vector3 bodyPosition, Vector3 bodyHalfExtents, int layerMask = ~0, QueryTriggerInteraction queryMode = QueryTriggerInteraction.UseGlobal)
     {
         bodyPosition = GetCenterAtBodyPosition(bodyPosition);
-        return Physics.OverlapBox(bodyPosition, bodyHalfExtents, rbody.rotation, layerMask);
+        return Physics.OverlapBox(bodyPosition, bodyHalfExtents, rbody.rotation, layerMask, queryMode);
     }
     
     public RaycastHit[] Cast(Vector3 bodyPosition, Vector3 direction, float distance, int layerMask = ~0, QueryTriggerInteraction queryMode = QueryTriggerInteraction.UseGlobal)
@@ -156,7 +156,7 @@ public class KinematicBody : MonoBehaviour
         Vector3 sizeOriginal = col.size;
         Vector3 sizeWithSkin = col.size + Vector3.one * contactOffset;
 
-        var candidates = Overlap(projectedPos, sizeWithSkin / 2);
+        var candidates = Overlap(projectedPos, sizeWithSkin / 2, -1, QueryTriggerInteraction.Ignore);
 
         // HACK: since we can't pass a custom size to Physics.ComputePenetration (see below),
         //       we need to assign it directly to the collide prior to calling it and then

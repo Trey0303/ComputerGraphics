@@ -42,7 +42,7 @@ public class IKHead : MonoBehaviour
         //Debug.Log("in range");
         if(other.gameObject.tag == "Look")
         {
-            Debug.Log("Look");
+            //Debug.Log("Look");
             inRange = true;
             lookObj = other.transform.GetChild(0);
             ikActive = true;

@@ -10,6 +10,8 @@ using UnityEngine;
 /// </summary>
 public class SamplePlayerCharacter : MonoBehaviour
 {
+    public ParticleSystem system;
+
     public GameObject ui;
 
     private GrabRange grabRange;
@@ -34,6 +36,9 @@ public class SamplePlayerCharacter : MonoBehaviour
     void Start()
     {
         ui.SetActive(uiActive);
+
+        system.enableEmission = false;
+
     }
 
     private void Update()
@@ -76,6 +81,16 @@ public class SamplePlayerCharacter : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 motor.JumpInput();
+
+                if (motor.Grounded)
+                {
+                    //emit jump particles
+                    ParticleControl jumpParticles = GetComponent<ParticleControl>();
+                    //                       color,size,number
+                    jumpParticles.DoEmit(Color.blue, 1f, 5);
+
+                }
+
             }
 
             if (Input.GetKeyDown(KeyCode.T))

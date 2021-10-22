@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Look
+  - Item
+  - Orange
+  - Green
+  - Purple
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - 
   - Look
   - Player
-  - 
+  - UiItems
   - 
   - 
   - 

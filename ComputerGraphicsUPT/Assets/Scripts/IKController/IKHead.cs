@@ -9,7 +9,7 @@ public class IKHead : MonoBehaviour
     public bool ikActive = false;
     //public Transform headObj = null;
     public Transform lookObj = null;
-    private bool inRange;
+    //private bool inRange;
 
     void Start()
     {
@@ -43,7 +43,7 @@ public class IKHead : MonoBehaviour
         if(other.gameObject.tag == "Look")
         {
             //Debug.Log("Look");
-            inRange = true;
+            //inRange = true;
             lookObj = other.transform.GetChild(0);
             ikActive = true;
 
@@ -54,7 +54,7 @@ public class IKHead : MonoBehaviour
     {
         if (other.gameObject.tag == "Look")
         {
-            inRange = false;
+            //inRange = false;
             lookObj = null;
             ikActive = false;
 

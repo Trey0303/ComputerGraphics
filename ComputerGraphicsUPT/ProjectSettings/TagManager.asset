@@ -9,6 +9,9 @@ TagManager:
   - Orange
   - Green
   - Purple
+  - Bloom
+  - MotionBlur
+  - DepthOfField
   layers:
   - Default
   - TransparentFX

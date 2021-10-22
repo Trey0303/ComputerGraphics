@@ -12,7 +12,8 @@ public class UnityEventFloat : UnityEvent<float> { }
 public class Health : MonoBehaviour
 {
     public Slider healthBar;
-    float curHealth = 3;//set a seperate float from the healtbar
+    //[Range(0, 3)]
+    public float curHealth = 3;//set a seperate float from the healtbar
     bool invincible = false;
     public float invincibilityTime = 2;
     private float setBackTime = 0;
@@ -30,12 +31,12 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
             
-                TakeDamage(1);
+        //        TakeDamage(1);
 
-        }
+        //}
         if (invincible)
         {
             invincibilityTime -= Time.deltaTime;

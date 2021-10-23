@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -7,51 +8,88 @@ using UnityEngine.Rendering.Universal;
 public class FadeToBlack : MonoBehaviour
 {
     public Volume vol;
-
-    //Color color;
-
-    //Vignette vignetteTemp;
-
-    //public Volume volTemp;
-
-    public ColorParameter colorTemp;
-    public ColorParameter colorOriginal;
+    private bool startFade;
+    private float fadeSpeed;
+    private bool fadeOut;
 
     // Start is called before the first frame update
     void Start()
     {
         vol = this.GetComponent<Volume>();
-        //volTemp = new Volume();
 
-        colorTemp.value = new Color(0f, 0f, 0f);
+        startFade = false;
+        fadeOut = false;
+        fadeSpeed = 7;
 
-        if (vol.profile.TryGet<Vignette>(out var vignette))
+        if (vol.profile.TryGet<ColorAdjustments>(out var adj))
         {
-            vignette.active = false;
-            colorOriginal = vignette.color;
-
+            adj.postExposure.value = 0;
         }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //fade
         if (Input.GetKeyDown(KeyCode.F))
         {
-            StartCoroutine(Fade());
-            
+            startFade = true;
         }
+        if (startFade)
+        {
+            StartCoroutine(Fade());
+        }
+
+
     }
 
     IEnumerator Fade()
     {
-        if (vol.profile.TryGet<Vignette>(out var vignette))
+        if (vol.profile.TryGet<ColorAdjustments>(out var adj))
         {
-            vignette.active = true;
-            vignette.color = colorTemp;
+            if (!fadeOut)
+            {
+                FadeIn();
+
+            }
             yield return new WaitForSeconds(1);
-            vignette.color = colorOriginal;
+            
+            if (fadeOut)
+            {
+                FadeOut();
+                
+            }
+        }
+    }
+
+    void FadeIn()
+    {
+        if (vol.profile.TryGet<ColorAdjustments>(out var adj))
+        {
+
+            adj.postExposure.value -= Time.deltaTime * fadeSpeed;
+            //Debug.Log(adj.postExposure.value);
+
+            if (adj.postExposure.value <= -13f)
+            {
+                fadeOut = true;
+                //Debug.Log(fadeOut);
+            }
+        }
+    }
+    private void FadeOut()
+    {
+        if (vol.profile.TryGet<ColorAdjustments>(out var adj))
+        {
+            adj.postExposure.value += Time.deltaTime * fadeSpeed;
+            //Debug.Log(adj.postExposure.value);
+
+            if (adj.postExposure.value > 0)
+            {
+                adj.postExposure.value = 0;
+                startFade = false;
+                fadeOut = false;
+            }
         }
     }
 }

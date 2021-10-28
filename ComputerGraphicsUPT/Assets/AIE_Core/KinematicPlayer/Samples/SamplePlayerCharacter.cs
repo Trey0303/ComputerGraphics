@@ -35,9 +35,18 @@ public class SamplePlayerCharacter : MonoBehaviour
 
     void Start()
     {
-        ui.SetActive(uiActive);
+        if (ui != null)
+        {
+            ui.SetActive(uiActive);
 
-        system.enableEmission = false;
+        }
+
+        if(system != null)
+        {
+            system.enableEmission = false;
+
+        }
+
 
     }
 

@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6475748300752904640
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: shaderGraph
+  m_Name: shaderMaterial2
   m_Shader: {fileID: -6465566751694194690, guid: 21128e64ecd86ac47802dfe3ef1e0114,
     type: 3}
   m_ShaderKeywords: 
@@ -53,10 +66,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_2F0CEB98: 1
     - Vector1_435A6933: 1
     - Vector1_5FD30278: 1
-    - Vector1_F077E91C: 7
+    - Vector1_F077E91C: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -70,7 +82,6 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _QueueOffset: 0
-    - _Radius: 8
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -80,27 +91,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_4074EB6A: {r: 8.47419, g: 0.6211448, b: 0, a: 1}
-    - Color_D345483C: {r: 1, g: 0, b: 0, a: 0}
-    - Vector3_AFE4D086: {r: 0, g: 0, b: 0, a: 0}
-    - Vector3_BB7AD64C: {r: 0, g: 0, b: 0, a: 0}
+    - Color_4074EB6A: {r: 0, g: 0.980809, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _TargetColor: {r: 1, g: 0, b: 0, a: 0}
-    - _TargetPosition: {r: 22.32, g: 0, b: 0, a: 0}
+    - _TargetColor: {r: 0.330096, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &3814712291542276974
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2

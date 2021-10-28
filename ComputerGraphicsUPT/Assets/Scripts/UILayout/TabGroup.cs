@@ -75,7 +75,7 @@ public class TabGroup : MonoBehaviour
 
     void HideTab()
     {
-        if (lastTab != null)
+        if (panels != null)
         {
             panels[lastTab].SetActive(false);
 

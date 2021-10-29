@@ -3,7 +3,11 @@
     // The properties block of the Unity shader. In this example this block is empty
        // because the output color is predefined in the fragment shader code.
     Properties
-    { }
+    { 
+        //wobble porperties
+        _Amplitude("Wave Size", Range(0,1)) = .5
+        _Frequency("Wave Freqency", Range(1, 8)) = 2
+    }
 
     // The SubShader block containing the Shader code. 
     SubShader
@@ -35,7 +39,6 @@
                 // space.
                 float4 positionOS   : POSITION;
                 float4 normalOS : NORMAL;
-                //float4 textcoordOS : TEXTCORD0;
 
             };
 
@@ -44,8 +47,11 @@
                 // The positions in this struct must have the SV_POSITION semantic.
                 float4 positionHCS  : SV_POSITION;
                 float4 normalHCS : NORMAL;
-                //float4 textcoordHCS : TEXTCORD0;
+
             };
+            
+            float _Amplitude;
+            float _Frequency;
 
             // The vertex shader definition with properties defined in the Varyings 
             // structure. The type of the vert function must match the type (struct)
@@ -54,18 +60,27 @@
             {
                 // Declaring the output object (OUT) with the Varyings struct.
                 Varyings OUT;
+
+
+                IN.positionOS.y += sin(_Time.y); 
+
+                IN.positionOS.y += sin(IN.positionOS.x * _Frequency + _Time.y) * _Amplitude;//wobble effect
+
+                IN.positionOS.xyz *= 1.5;//objects scale
+
                 // The TransformObjectToHClip function transforms vertex positions
                 // from object space to homogenous space
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-                OUT.normalHCS = float4(TransformObjectToWorldNormal(IN.normalOS), 0); 
+                OUT.normalHCS = float4(TransformObjectToWorldNormal(IN.normalOS), 0);
 
-                //OUT.textcoordHCS = 
+              
 
                 /*OUT.tangentHCS : */
 
                 // Returning the output.
                 return OUT;
             }
+
 
             // The fragment shader definition.            
             half4 frag() : SV_Target
@@ -75,6 +90,8 @@
                 customColor = half4(0.5, 0, 0, 1);
                 return customColor;
             }
+
+
             ENDHLSL
         }
     }

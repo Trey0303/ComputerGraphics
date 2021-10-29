@@ -35,19 +35,16 @@
                 // space.
                 float4 positionOS   : POSITION;
                 float4 normalOS : NORMAL;
-                float4 texcoordOS : TEXCOORD;
-                float4 tangentOS : TANGENT;
-                float4 colorOS : COLOR;
+                //float4 textcoordOS : TEXTCORD0;
+
             };
 
             struct Varyings
             {
                 // The positions in this struct must have the SV_POSITION semantic.
                 float4 positionHCS  : SV_POSITION;
-                float4 normalHCS : SV_NORMAL;
-                float4 texcoordHCS : SV_TEXCOORD;
-                float4 tangentHCS : SV_TANGENT;
-                float4 colorOS : SV_COLOR;
+                float4 normalHCS : NORMAL;
+                //float4 textcoordHCS : TEXTCORD0;
             };
 
             // The vertex shader definition with properties defined in the Varyings 
@@ -60,7 +57,10 @@
                 // The TransformObjectToHClip function transforms vertex positions
                 // from object space to homogenous space
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-                OUT.normalHCS = TransformObjectToWorldNormal(normalOS);
+                OUT.normalHCS = float4(TransformObjectToWorldNormal(IN.normalOS), 0); 
+
+                //OUT.textcoordHCS = 
+
                 /*OUT.tangentHCS : */
 
                 // Returning the output.

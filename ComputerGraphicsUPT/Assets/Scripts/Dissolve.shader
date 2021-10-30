@@ -5,7 +5,7 @@
         Properties
         {
         
-            [MainTexture] _BaseMap("Albedo", 2D) = "white"{}
+            _BaseTex("Albedo", 2D) = "white"{}
             _Cutoff("Alpha Cutoff", Range(0, 1)) = 0.5
 
         }
@@ -78,7 +78,7 @@
                 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"      
 
                 // Material shader variables are not defined in SRP or LWRP shader library.
-                // This means _BaseColor, _BaseMap, _BaseMap_ST, and all variables in the Properties section of a shader
+                // This means _BaseColor, _BaseTex, _BaseTex_ST, and all variables in the Properties section of a shader
                 // must be defined by the shader itself. If you define all those properties in CBUFFER named
                 // UnityPerMaterial, SRP can cache the material properties between frames and reduce significantly the cost
                 // of each drawcall.
@@ -108,9 +108,13 @@
                     float4 normalHCS : NORMAL;
                 };
                 
-                /*CBUFFER_START(UnityPerMaterial)
-                    float4 _BaseMap_ST;
-                CBUFFER_END*/
+                //float _Cutoff;
+
+                TEXTURE2D(_BaseTex);
+                SAMPLER(sampler_BaseTex);
+                CBUFFER_START(UnityPerMaterial)
+                    float4 _BaseTex_ST;
+                CBUFFER_END
 
                 // The vertex shader definition with properties defined in the Varyings 
                 // structure. The type of the vert function must match the type (struct)
@@ -126,9 +130,7 @@
                     OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                     OUT.normalHCS = float4(TransformObjectToWorldNormal(IN.normalOS), 0);
 
-                    IN.uvHCS.a = _cutOff;
-
-                    OUT.uvHCS = TRANSFORM_TEX(IN.uvOS, _BaseMap);
+                    OUT.uvHCS = TRANSFORM_TEX(IN.uvOS, _BaseTex);
 
 
 
@@ -143,14 +145,14 @@
 
 
                 // The fragment shader definition.            
-                half4 frag() : SV_Target
+                half4 frag(Varyings IN) : SV_Target
                 {
+                    half4 color = SAMPLE_TEXTURE2D(_BaseTex, sampler_BaseTex, IN.uvHCS);
+                    if (color.r < _Cutoff) {
+                        discard;
+                    }
 
-
-                    // Defining the color variable and returning it.
-                    half4 customColor;
-                    customColor = half4(0.5, 0, 0, 1);
-                    return customColor;
+                    return SAMPLE_TEXTURE2D(_BaseTex, sampler_BaseTex, IN.uvHCS);
                 }
                 ENDHLSL
             }

@@ -126,7 +126,7 @@
                     OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                     OUT.normalHCS = float4(TransformObjectToWorldNormal(IN.normalOS), 0);
 
-
+                    IN.uvHCS.a = _cutOff;
 
                     OUT.uvHCS = TRANSFORM_TEX(IN.uvOS, _BaseMap);
 

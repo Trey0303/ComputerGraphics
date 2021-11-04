@@ -15,16 +15,17 @@ public class Counter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mytext.text = "0";
+        //mytext.text = "0";
         count = 0;
-        gridWidth = mytext.GetComponent<RectTransform>().sizeDelta.x;
-        gridHeight = mytext.GetComponent<RectTransform>().sizeDelta.y;
+        mytext = GetComponent<Text>();
+        //gridWidth = mytext.GetComponent<RectTransform>().sizeDelta.x;
+        //gridHeight = mytext.GetComponent<RectTransform>().sizeDelta.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-           
+        //mytext.text = "" + count;
     }
 
     private void OnGUI()

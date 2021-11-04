@@ -6,12 +6,16 @@
     {
 
         _BaseTex("Albedo", 2D) = "white"{}
+        //normalized value with range of 0 to 1(0 = whole, 1 = dissolved)
         _Cutoff("Alpha Cutoff", Range(0, 1)) = 0.5
+
+        //heightOffset
+        _Offset("Hight Offset", Range(0,1)) = 0.5
 
     }
 
         // The SubShader block containing the Shader code. 
-            SubShader
+        SubShader
         {
             // SubShader Tags define when and under which conditions a SubShader block or
             // a pass is executed.
@@ -102,24 +106,25 @@
             struct Varyings
             {
                 float2 uvHCS : TEXCOORD0;
-                //float2 uv
                 // The positions in this struct must have the SV_POSITION semantic.
                 float4 positionHCS  : SV_POSITION;
                 float4 normalHCS : NORMAL;
             };
 
             //float _Cutoff;
+            float _Offset;
 
             TEXTURE2D(_BaseTex);
             SAMPLER(sampler_BaseTex);
+
             CBUFFER_START(UnityPerMaterial)
                 float4 _BaseTex_ST;
             CBUFFER_END
 
-                // The vertex shader definition with properties defined in the Varyings 
-                        // structure. The type of the vert function must match the type (struct)
-                        // that it returns.
-                Varyings vert(Attributes IN)
+            // The vertex shader definition with properties defined in the Varyings 
+            // structure. The type of the vert function must match the type (struct)
+            // that it returns.
+            Varyings vert(Attributes IN)
             {
                 // Declaring the output object (OUT) with the Varyings struct.
                 Varyings OUT;
@@ -127,35 +132,55 @@
 
                 // The TransformObjectToHClip function transforms vertex positions
                 // from object space to homogenous space
-                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                
+                //take a color channel and multiply it by the offset
+                
+                //float _TexelSize_Width = _BaseTex_ST.x;
+                //float _TexelSize_Height = _BaseTex_ST.y;
+
+
+                //apply offset changes to y position
+                if (IN.uvOS.r < _Offset) {
+                    //IN.positionOS.y = _TexelSize_Width * _Offset;
+                    //IN.positionOS.y = _TexelSize_Height * _Offset;
+                    IN.positionOS.y = IN.uvOS.r * _Offset;
+                    //IN.uvOS.r = IN.uvOS.r * _Offset;
+                
+                }
+
+                
+                //any changes made to vertex position before this line will be applied in 'clip space'
+                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);//any changes made to vertex position after this line will be applied in 'world space'
+                
+
                 OUT.normalHCS = float4(TransformObjectToWorldNormal(IN.normalOS), 0);
 
+                //uv texture
                 OUT.uvHCS = TRANSFORM_TEX(IN.uvOS, _BaseTex);
-
-
-
-                //OUT.uvHCS = IN.uvOS;
-
-
-                /*OUT.tangentHCS : */
 
                 // Returning the output.
                 return OUT;
             }
-        
-
 
             // The fragment shader definition.            
             half4 frag(Varyings IN) : SV_Target
             {
                 half4 color = SAMPLE_TEXTURE2D(_BaseTex, sampler_BaseTex, IN.uvHCS);
+                //disolve parts of texture whos red channel is less than the cutoff point
                 if (color.r < _Cutoff) {
                     discard;
                 }
 
-                return SAMPLE_TEXTURE2D(_BaseTex, sampler_BaseTex, IN.uvHCS);
+                //display height offset changes to texture
+                if (color.r < _Offset) {
+                    color.r = color.r * _Offset;
+                }
+                /*IN.positionOS.y = color.r * _Offset;*/
+
+                return SAMPLE_TEXTURE2D(_BaseTex, sampler_BaseTex, IN.uvHCS)/* * _Offset*/;
             }
             ENDHLSL
 
             }
+        }
 }

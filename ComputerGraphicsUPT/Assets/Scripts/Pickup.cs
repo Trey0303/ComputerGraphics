@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    Counter countitem;
+    public GameObject ui;
+    public Counter countItem;
+
 
     private void Start()
     {
-        //countitem = GameObject.GetComponent("Counter");
+        ui = GameObject.FindGameObjectWithTag("UICounter");
+        countItem = ui.GetComponent<Counter>();
     }
 
     private void OnTriggerEnter(Collider player)
@@ -19,7 +22,7 @@ public class Pickup : MonoBehaviour
             if (gameObject.tag == "Orange")
             {
                 Debug.Log("Orange");
-                countitem.count++;
+                countItem.count++;
                 Destroy(gameObject);
             }
             if (gameObject.tag == "Green")

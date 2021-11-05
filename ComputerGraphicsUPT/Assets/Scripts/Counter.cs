@@ -7,7 +7,7 @@ public class Counter : MonoBehaviour
 {
     
     public Text mytext;
-    public Transform textpos;
+    //public Transform textpos;
     public int count;
     public float gridWidth;
     private float gridHeight;
@@ -17,7 +17,7 @@ public class Counter : MonoBehaviour
     {
         //mytext.text = "0";
         count = 0;
-        mytext = GetComponent<Text>();
+        mytext.text = "" + count;
         //gridWidth = mytext.GetComponent<RectTransform>().sizeDelta.x;
         //gridHeight = mytext.GetComponent<RectTransform>().sizeDelta.y;
     }
@@ -25,7 +25,7 @@ public class Counter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //mytext.text = "" + count;
+        mytext.text = "" + count;
     }
 
     private void OnGUI()

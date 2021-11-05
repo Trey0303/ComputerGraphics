@@ -1,7 +1,4 @@
-﻿  time.cpp
-C:\Users\s209058\source\repos\ComputerGraphics\RendererCPlusPlus\Renderer\Renderer\time.h(10,23): error C2533: 'time': constructors not allowed a return type
-C:\Users\s209058\source\repos\ComputerGraphics\RendererCPlusPlus\Renderer\Renderer\time.h(10,23): error C2583: 'time::time': 'const' 'this' pointer is illegal for constructors/destructors
-C:\Users\s209058\source\repos\ComputerGraphics\RendererCPlusPlus\Renderer\Renderer\time.cpp(4,1): error C2533: 'time::{ctor}': constructors not allowed a return type
-C:\Users\s209058\source\repos\ComputerGraphics\RendererCPlusPlus\Renderer\Renderer\time.cpp(4,1): error C2556: 'time::time(void) const': overloaded function differs only by return type from 'time::time(void) const'
-C:\Users\s209058\source\repos\ComputerGraphics\RendererCPlusPlus\Renderer\Renderer\time.h(10): message : see declaration of 'time::time'
-C:\Users\s209058\source\repos\ComputerGraphics\RendererCPlusPlus\Renderer\Renderer\time.cpp(5,9): error C3490: 'totalTime' cannot be modified because it is being accessed through a const object
+﻿  main.cpp
+C:\Users\s209058\source\repos\ComputerGraphics\RendererCPlusPlus\Renderer\Renderer\main.cpp(14,5): error C3861: 'setTime': identifier not found
+  time.cpp
+  Generating Code...

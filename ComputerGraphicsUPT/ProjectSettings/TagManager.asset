@@ -12,6 +12,7 @@ TagManager:
   - Bloom
   - MotionBlur
   - DepthOfField
+  - UICounter
   layers:
   - Default
   - TransparentFX

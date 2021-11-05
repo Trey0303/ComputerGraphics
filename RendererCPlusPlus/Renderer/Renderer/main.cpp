@@ -2,12 +2,16 @@
 
 #include "render.h"
 
+#include "time.h"
+
 using namespace aie;
 
 
 int main() {
     context window;
     window.init(640, 480, "Hello Window");
+
+    setTime(0.0f);
 
     //create a triangle
     vertex triVerts[] = {

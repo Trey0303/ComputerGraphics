@@ -7,10 +7,10 @@ private:
     float lastDeltaTime;      // time at the end of the last frame
 
 public:
-    float time() const;       // time since start of the program
+    float timeSinceStart() const;// time since start of the program
     float systemTime() const; // get current real-world time
-    float deltaTime() const;  // time between frames
+    float deltaTime() ;  // time between frames
 
     void resetTime();         // reset time to zero again
-    void setTime(float);      // set time to a new value
+    void setTime(float newTime);      // set time to a new value
 };

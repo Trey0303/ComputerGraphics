@@ -16,6 +16,7 @@ namespace aie
     {
         glm::vec4 pos;
         glm::vec4 color;
+        glm::vec2 uv;
     };
 
     /*We'll create a different object called geometry to represent our meshes.*/
@@ -34,13 +35,28 @@ namespace aie
         GLuint program;         // ogl program names
     };
 
+    struct texture {
+        GLuint handle;
+        unsigned width, height, channel;
+    };
+
     geometry makeGeometry(const vertex* const verts, GLsizei vertCount,
                           const GLuint* const indicies, GLsizei indxCount);
     void freeGeometry(geometry& geo);
 
     shader makeShader(const char* vertSource, const char* fragSource);
 
+    shader loadShader(const char* vertPath, const char* fragPath);
+
     void freeShader(shader& shad);
+
+    texture loadTexture(const char* imagePath);
+
+    texture makeTexture(unsigned width, unsigned height, unsigned channels, const unsigned char* pixels);
+
+    void setUniform(const shader& shad, GLuint location, const glm::mat4& value);
+
+    void setUniform(const shader& shad, GLuint location, const texture& value, int textureSlot);
 
     void draw(const shader& shad, const geometry& geo);
 }

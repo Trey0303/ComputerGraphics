@@ -1,5 +1,12 @@
 #include "render.h"
 
+#include <fstream>
+#include <iostream>
+#include <string>
+
+#define STB_IMAGE_IMPLEMENTATION 1
+#include "stb/stb_image.h"
+
 namespace aie
 {
     geometry makeGeometry(const vertex* verts, GLsizei vertCount, const GLuint* indicies, GLsizei indxCount)
@@ -36,6 +43,10 @@ namespace aie
         //color
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)16);//need to skip by 16 to come after position
+
+        //uv
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)32);
 
         //unbind buffers when done
         glBindVertexArray(0);
@@ -89,10 +100,120 @@ namespace aie
         return newShad;
     }
 
+	shader loadShader(const char* vertPath, const char* fragPath)
+	{
+        std::ifstream file; 
+        std::string buffer;
+
+        //load shaders into string
+        std::string vertContents;
+        file.open(vertPath);
+        if (file.is_open()) {
+            while (std::getline(file, buffer)) {
+                vertContents += buffer + "\n";
+            }
+        }
+        file.close();
+
+        std::string fragContents;
+        file.open(fragPath);
+        if (file.is_open()) {
+            while (std::getline(file, buffer)) {
+                fragContents += buffer + "\n";
+            }
+        }
+        file.close();
+        //call makeshader and pass those stringd(as cstrings)
+
+		return makeShader(vertContents.c_str(), fragContents.c_str());
+	}
+
     void freeShader(shader& shad)
     {
         glDeleteShader(shad.program);
         shad = {};
+    }
+
+    texture loadTexture(const char* imagePath)
+    {
+        int imageWidth, imageHeight, imageFormat;
+        unsigned char* rawPixelData = nullptr;
+
+
+        stbi_set_flip_vertically_on_load(true);
+        rawPixelData = stbi_load(imagePath,
+            &imageWidth,
+            &imageHeight,
+            &imageFormat,
+            STBI_default);//color data type
+
+        texture tex = makeTexture(imageWidth, imageHeight, imageFormat, rawPixelData);
+        stbi_image_free(rawPixelData);
+
+        return tex;
+    }
+
+    texture makeTexture(unsigned width, unsigned height, unsigned channels, const unsigned char* pixels)
+    {
+        texture tex = { 0, width, height, channels };
+
+        GLenum oglFormat = GL_RED;// worst case scenario
+        switch (channels) {
+        case 1:
+            oglFormat = GL_RED;
+            break;
+        case 2:
+            oglFormat = GL_RG;
+            break;
+        case 3:
+            oglFormat = GL_RGB;
+            break;
+        case 4:
+            oglFormat = GL_RGBA;
+            break;
+        }
+
+        glGenTextures(1, &tex.handle);
+        glBindTexture(GL_TEXTURE_2D, tex.handle);
+
+        glTexImage2D(GL_TEXTURE_2D,     // texture type(what texture)
+            0,//mipmap level is 0(0 is original quality)
+            oglFormat,         // color format
+            width,             // width
+            height,            // height
+            0,//border
+            oglFormat,         // color format
+            GL_UNSIGNED_BYTE,  // type of data
+            pixels);           // pointer to data
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+        return tex;
+    }
+
+    void freeTexture(texture& tex)
+    {
+        glDeleteTextures(1, &tex.handle);
+        tex = {};
+    }
+
+    void setUniform(const shader& shad, GLuint location, const glm::mat4& value)
+    {
+        glProgramUniformMatrix4fv(shad.program, location, 1, GL_FALSE, &value[0][0]);
+    }
+
+    void setUniform(const shader& shad, GLuint location, const texture& value, int textureSlot)
+    {
+        // specify the texture slot we are working with(setting up slot)
+        glActiveTexture(GL_TEXTURE0 + textureSlot);
+        // bind the texture to that slot
+        glBindTexture(GL_TEXTURE_2D, value.handle);
+
+        // assign that texture (slot) to the shader
+        glProgramUniform1i(shad.program, location, textureSlot);
     }
 
     void draw(const shader& shad, const geometry& geo)

@@ -4,6 +4,9 @@
 
 #include "time.h"
 
+#include "glm/ext.hpp"
+#include <iostream>
+
 using namespace aie;
 
 
@@ -11,21 +14,24 @@ int main() {
     context window;
     window.init(640, 480, "Hello Window");
 
-    setTime(0.0f);
+    timer time;
 
     //create a triangle
     vertex triVerts[] = {
         {//vertex 0 - bottom left
             {-.5f,-.5f,0,1},//vertex 0 position
-            {1, 0, 0, 1}//color
+            {1, 0, 0, 1},//color
+            {0.0f,0.0f}//uv
         },
         {//vertex 1 - bottom right
             {.5f,-.5f,0,1},//vertex 1 position
-            {0, 0, 1, 1}//color
+            {0, 0, 1, 1},//color
+            {1.0f,0.0f}//uv
         },
         {//vertex 2 - top middle
             {0.0f,.5f,0,1},//vertex 2 position
-            {0, 1, 0, 1}//color
+            {0, 1, 0, 1},//color
+            {0.5f,1.0f}//uv
         }
     };
     unsigned int triIndices[] = { 0,1,2 };
@@ -51,6 +57,7 @@ int main() {
         {//vertex 0 - bottom left
             {-.5f,-.5f,0,1},//vertex 0 position
             {1, 0, 0, 1}//color
+            
         },
         {//vertex 1 - bottom right
             {.5f,-.5f,0,1},//vertex 1 position
@@ -89,23 +96,56 @@ int main() {
 
     shader multiColorShad = makeShader(colorVert, colorFrag);
 
+    //loading shader
+    shader stbShad = loadShader("res\\basic.vert", "res\\basic.frag");
 
+    //loading textures
+    texture checker = loadTexture("res\\uvchecker.jpg");
+    
 
+    glm::mat4 triModel = glm::identity<glm::mat4>(); // #include "glm/ext.hpp"
+    glm::mat4 camView = glm::lookAt(glm::vec3(0, 1, 5), //eye
+                                    glm::vec3(0, 0, 0), //look at
+                                    glm::vec3(0, 1, 0));//up
+    glm::mat4 camProj = glm::perspective(glm::radians(45.0f), // vertical fov
+                                        640.0f / 480.0f,    // aspect ratio
+                                        0.1f,               // near-plane
+                                        1000.0f);           // far-plane
 
     // update-render loop
     while (!window.shouldClose())
     {
+        time.time();
         window.tick();
+        window.clear();
+        time.systemTime();
+        
+
         //update
+        time.deltaTime();
+
+        if (time.deltaTime() >= 10) {
+            time.resetTime();
+        }
+
+        triModel = glm::rotate(triModel, 0.5f, glm::vec3(0, 1, 0));
+
 
         //draw
-        window.clear();
+        //shader
+        setUniform(stbShad, 0, camProj);// proj at index 0
+        setUniform(stbShad, 1, camView);// view at index 1
+        setUniform(stbShad, 2, triModel);// modl at index 2
 
+        //uv
+        setUniform(stbShad, 3, checker, 0);
+        
         //draw triangle
-        //draw(multiColorShad, basicTriangleGeo);
-
+        draw(stbShad, basicTriangleGeo);
+        
         //draw Rectangle
-        draw(multiColorShad, basicRectangleGeo);
+        //draw(multiColorShad, basicRectangleGeo);
+
 
     }
     window.term();

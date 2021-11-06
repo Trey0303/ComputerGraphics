@@ -1,31 +1,66 @@
+
 #include "time.h"
+#include "glfw/glfw3.h"
 
-//float time::time() const
-//{
-//	return  ;
-//}
+#include <iostream>
+#include <chrono>//system clock
+#include <ctime>
+#include <iomanip>
 
-float time::timeSinceStart() const
+
+// time since start of the program
+float timer::time() const
 {
-	return totalTime;
+	return glfwGetTime();
 }
 
-float time::systemTime() const
+// get current real-world time
+float timer::systemTime() const
 {
-	return 0.0f;
+	using std::chrono::system_clock;
+
+	
+	std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+	//now = std::chrono::system_clock::now();
+
+	time_t timeNow;
+
+	timeNow = std::chrono::system_clock::to_time_t(now);//converts system clock to time
+
+
+#pragma warning(suppress : 4996)//use this to prevent unnecessary error for the line below
+	std::cout << "real time: " << ctime(&timeNow) << std::endl;//prints out time in debug console
+
+	
+	return 0;
 }
 
-float time::deltaTime()
+// time between frames
+float timer::deltaTime()
 {
-	return lastDeltaTime++;
+	curDeltaTime = glfwGetTime();
+	_deltaTime = curDeltaTime - lastDeltaTime;
+	//std::cout << "delta time: " << _deltaTime << std::endl;
+	lastDeltaTime = _deltaTime;
+	return _deltaTime;
 }
 
-void time::resetTime()
+// reset time to zero again
+void timer::resetTime()
 {
+
+	_deltaTime = 0.0f;
+	curDeltaTime = 0.0f;
 	lastDeltaTime = 0.0f;
+
+
 }
 
-void time::setTime(float newTime)
+// set time to a new value
+void timer::setTime(float newTime)
 {
-	lastDeltaTime = newTime;
+	glfwSetTime(newTime);
+	//totalTime = newTime;
 }
+
+

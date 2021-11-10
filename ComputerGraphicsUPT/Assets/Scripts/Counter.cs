@@ -5,19 +5,41 @@ using UnityEngine.UI;
 
 public class Counter : MonoBehaviour
 {
-    
-    public Text mytext;
-    //public Transform textpos;
-    public int count;
-    public float gridWidth;
-    private float gridHeight;
+    //active ingame
+    public Text orangeText;
+    public int orangeCount;
+
+    public Text greenText;
+    public int greenCount;
+
+    public Text purpleText;
+    public int purpleCount;
+
+
+    //paused game
+    public Text orangeTextPaused;
+
+   // public Text greenTextPaused;
+
+    public Text purpleTextPaused;
+
 
     // Start is called before the first frame update
     void Start()
     {
         //mytext.text = "0";
-        count = 0;
-        mytext.text = "" + count;
+        orangeCount = 0;
+        greenCount = 0;
+        purpleCount = 0;
+
+        orangeText.text = "" + orangeCount;
+        greenText.text = "" + greenCount;
+        purpleText.text = "" + purpleCount;
+
+        orangeTextPaused.text = "" + orangeCount;
+       // greenTextPaused.text = "" + greenCount;
+        purpleTextPaused.text = "" + purpleCount;
+
         //gridWidth = mytext.GetComponent<RectTransform>().sizeDelta.x;
         //gridHeight = mytext.GetComponent<RectTransform>().sizeDelta.y;
     }
@@ -25,16 +47,13 @@ public class Counter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mytext.text = "" + count;
+        orangeText.text = "" + orangeCount;
+        greenText.text = "" + greenCount;
+        purpleText.text = "" + purpleCount;
+
+        orangeTextPaused.text = "" + orangeCount;
+        //greenTextPaused.text = "" + greenCount;
+        purpleTextPaused.text = "" + purpleCount;
     }
 
-    private void OnGUI()
-    {
-        //Unity execute the method, and draws in every
-        //frame a label (transparent, of curse)
-        //positioned in x=1 Y=1 with height=30 and width=200,
-        //and prints the value stored
-        //in butterflyCounter);
-        //GUI.Label(new Rect(this.transform.position.x, this.transform.position.y, gridWidth, gridHeight), "Butterflies: " + count);
-    }
 }

@@ -14,9 +14,10 @@ namespace aie
     /*In this header, you'll want to create a new structure called vertex which will have one field: a 4D vector for its position.*/
     struct vertex
     {
-        glm::vec4 pos;
-        glm::vec4 color;
-        glm::vec2 uv;
+        glm::vec4 pos; //4x4 bytes = 16 
+        glm::vec4 color; //4x4 bytes = 16 
+        glm::vec2 uv; //2x4 bytes = 8 
+        glm::vec3 normal;//3x4 bytes = 12
     };
 
     /*We'll create a different object called geometry to represent our meshes.*/
@@ -57,6 +58,8 @@ namespace aie
     void setUniform(const shader& shad, GLuint location, const glm::mat4& value);
 
     void setUniform(const shader& shad, GLuint location, const texture& value, int textureSlot);
+
+    void setUniform(const shader& shad, GLuint location, const glm::vec3& value);
 
     void draw(const shader& shad, const geometry& geo);
 }

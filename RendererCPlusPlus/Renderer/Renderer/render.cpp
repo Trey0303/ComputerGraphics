@@ -2,10 +2,11 @@
 
 #include <fstream>
 #include <iostream>
-#include <string>
+#include <string> //string
 
 #define STB_IMAGE_IMPLEMENTATION 1
 #include "stb/stb_image.h"
+#include <glm\ext.hpp> //value_ptr
 
 namespace aie
 {
@@ -40,13 +41,23 @@ namespace aie
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)0);//need to skip by 0 because its the first field in struct vertex
 
+        //skip by 16 bytes
+
         //color
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)16);//need to skip by 16 to come after position
 
+        //skip by 16 bytes
+
         //uv
         glEnableVertexAttribArray(2);
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)32);
+
+        //skip by 8 bytes
+
+        //normal
+        glEnableVertexAttribArray(3);
+        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)40);
 
         //unbind buffers when done
         glBindVertexArray(0);
@@ -214,6 +225,11 @@ namespace aie
 
         // assign that texture (slot) to the shader
         glProgramUniform1i(shad.program, location, textureSlot);
+    }
+
+    void setUniform(const shader& shad, GLuint location, const glm::vec3& value)
+    {
+        glProgramUniform3fv(shad.program, location, 1, glm::value_ptr(value));
     }
 
     void draw(const shader& shad, const geometry& geo)

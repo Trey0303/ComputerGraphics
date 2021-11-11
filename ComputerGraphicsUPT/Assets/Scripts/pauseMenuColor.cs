@@ -33,7 +33,7 @@ public class pauseMenuColor : MonoBehaviour
         vignetteColor.value = Color.blue;
         if (vol.profile.TryGet<Vignette>(out var vignette))
         {
-            vignetteColorOriginal = vignette.color.value;
+            //vignetteColorOriginal = vignette.color.value;
             
         }
 

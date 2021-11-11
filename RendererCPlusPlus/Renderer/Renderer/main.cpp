@@ -21,17 +21,20 @@ int main() {
         {//vertex 0 - bottom left
             {-.5f,-.5f,0,1},//vertex 0 position
             {1, 0, 0, 1},//color
-            {0.0f,0.0f}//uv
+            {0.0f,0.0f},//uv
+            {0.0f ,0.0f , 1.0f} //normal
         },
         {//vertex 1 - bottom right
             {.5f,-.5f,0,1},//vertex 1 position
             {0, 0, 1, 1},//color
-            {1.0f,0.0f}//uv
+            {1.0f,0.0f},//uv
+            {0 ,0 , 1} //normal
         },
         {//vertex 2 - top middle
             {0.0f,.5f,0,1},//vertex 2 position
             {0, 1, 0, 1},//color
-            {0.5f,1.0f}//uv
+            {0.5f,1.0f},//uv
+            {0 ,0 , 1} //normal
         }
     };
     unsigned int triIndices[] = { 0,1,2 };
@@ -97,7 +100,7 @@ int main() {
     shader multiColorShad = makeShader(colorVert, colorFrag);
 
     //loading shader
-    shader stbShad = loadShader("res\\basic.vert", "res\\basic.frag");
+    shader stbShad = loadShader("res\\mvp.vert", "res\\mvp.frag");
 
     //loading textures
     texture checker = loadTexture("res\\uvchecker.jpg");
@@ -111,6 +114,10 @@ int main() {
                                         640.0f / 480.0f,    // aspect ratio
                                         0.1f,               // near-plane
                                         1000.0f);           // far-plane
+
+    //define ambient color
+    glm::vec3 ambient(0.3f, 0.3f, 0.3f);
+    glm::vec3 sunlight = glm::vec3(0, 0, -1);
 
     // update-render loop
     while (!window.shouldClose())
@@ -128,23 +135,26 @@ int main() {
             time.resetTime();
         }
 
-        triModel = glm::rotate(triModel, 0.5f, glm::vec3(0, 1, 0));
+        triModel = glm::rotate(triModel, 0.01f, glm::vec3(0, 1, 0));
 
 
         //draw
         //shader
-        setUniform(stbShad, 0, camProj);// proj at index 0
-        setUniform(stbShad, 1, camView);// view at index 1
-        setUniform(stbShad, 2, triModel);// modl at index 2
+        setUniform(stbShad, 0, camProj);//proj at index 0(projection mat)
+        setUniform(stbShad, 1, camView);//view at index 1(view mat)
+        setUniform(stbShad, 2, triModel);//modl at index 2(model mat)
 
         //uv
-        setUniform(stbShad, 3, checker, 0);
+        setUniform(stbShad, 3, checker, 0); //albedo(main color)
+        setUniform(stbShad, 4, ambient); //ambient light
+        setUniform(stbShad, 5, sunlight);
+
+        //draw Rectangle
+        //draw(multiColorShad, basicRectangleGeo);
         
         //draw triangle
         draw(stbShad, basicTriangleGeo);
         
-        //draw Rectangle
-        //draw(multiColorShad, basicRectangleGeo);
 
 
     }

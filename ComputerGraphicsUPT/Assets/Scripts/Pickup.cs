@@ -21,19 +21,19 @@ public class Pickup : MonoBehaviour
             //Debug.Log("picked up item");
             if (gameObject.tag == "Orange")
             {
-                Debug.Log("Orange");
+                //Debug.Log("Orange");
                 countItem.orangeCount++;
                 Destroy(gameObject);
             }
             if (gameObject.tag == "Green")
             {
-                Debug.Log("Green");
+                //Debug.Log("Green");
                 countItem.greenCount++;
                 Destroy(gameObject);
             }
             if (gameObject.tag == "Purple")
             {
-                Debug.Log("Purple");
+                //Debug.Log("Purple");
                 countItem.purpleCount++;
                 Destroy(gameObject);
             }

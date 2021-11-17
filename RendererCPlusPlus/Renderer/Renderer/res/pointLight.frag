@@ -20,19 +20,32 @@ out vec4 fragColor;
 
 void main()
 {
-    
+    //convert vector position to world space
+    //vector position * model(position * rotation * scale)
+    vec4 worldPos = vPos * model;
 
-    //get the amount of light that is hitting the surface
-    float d = max(0, dot(vNormal, -lightDir));
+    //get distance between light and object
+    vec4 distance = worldPos - lightPosition;
+
+    //get the length from distance
+    float distanceIntoLength = length(distance);
+
+    //see if object is within light radius
+    if(distanceIntoLength < lightRadius) {
+        //light up object by certain amount
+        d = 1.0f;
+    }
+    else {
+        d = 0.0f;
+    }
 
     //diffuse = dot product * light color
     vec3 diffuse = d * lightColor;
 
     //gets the objects texture
     vec4 base = texture(albedo, vUV);
-    
+
     //combines and outputs added light
     fragColor.rgb = base.rgb * (ambientLightColor + diffuse);
     fragColor.a = base.a;
-
 };

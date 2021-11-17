@@ -17,7 +17,7 @@ out vec4 vPos;
 void main()
 {
     gl_Position = proj * view * model * position;
-    vPos = gl_Position;//frag position?
+    vPos = gl_Position;//vertex position
     vUV = uv;
 
     //transform normals into world-space (sans translation)

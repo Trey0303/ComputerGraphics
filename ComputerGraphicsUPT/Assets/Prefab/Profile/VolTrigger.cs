@@ -24,7 +24,7 @@ public class VolTrigger : MonoBehaviour
     private void Update()
     {
         //if health is in critical range
-        if (health.curHealth <= 1)
+        if (health.curHealth == 1)
         {
             if (!critical)
             {

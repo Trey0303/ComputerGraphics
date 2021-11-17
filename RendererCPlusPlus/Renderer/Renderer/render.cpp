@@ -232,6 +232,11 @@ namespace aie
         glProgramUniform3fv(shad.program, location, 1, glm::value_ptr(value));
     }
 
+    void setUniform(const shader& shad, GLuint location,const float& value)
+    {
+        glProgramUniform1fv(shad.program, location, 1, &value);
+    }
+
     void draw(const shader& shad, const geometry& geo)
     {
         // bind the shader program

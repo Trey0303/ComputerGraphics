@@ -6,18 +6,22 @@ using UnityEngine.Rendering.Universal;
 
 public class pauseMenuColor : MonoBehaviour
 {
+    VolTrigger volTrigger;
+
     public GameObject player;
     public SamplePlayerCharacter playerScript;
 
     public GameObject ui;
 
-    public Volume vol;
+   // public Volume vol;
     //public Health health;
     private bool critical;
 
-    public ColorParameter vignetteColor;
+    public Color vignettePauseColor;
 
-    public ColorParameter vignetteColorOriginal;
+    public Color vignetteColorOriginal;
+    public float originalIntensity;
+
     //public Vignette vignette;
 
     //on triggerenter set to expected profile volumes
@@ -25,18 +29,18 @@ public class pauseMenuColor : MonoBehaviour
 
     private void Start()
     {
-        vol = this.GetComponent<Volume>();
+        volTrigger = gameObject.GetComponent<VolTrigger>();
+        //vol = this.GetComponent<Volume>();
         //get player gameObject and player controller script
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<SamplePlayerCharacter>();
 
-        vignetteColor.value = Color.blue;
-        if (vol.profile.TryGet<Vignette>(out var vignette))
+        vignettePauseColor = Color.blue;
+        if (volTrigger.vol.profile.TryGet<Vignette>(out var vignette))
         {
-            //vignetteColorOriginal = vignette.color.value;
-            
+            vignetteColorOriginal = vignette.color.value;
+            originalIntensity = vignette.intensity.value;
         }
-
 
         //get ui gameObject and player health script
         //ui = GameObject.FindGameObjectWithTag("UI");
@@ -50,20 +54,27 @@ public class pauseMenuColor : MonoBehaviour
     {
         if (playerScript.uiActive)
         {
-            if (vol.profile.TryGet<Vignette>(out var vignette))
+            if (volTrigger.vol.profile.TryGet<Vignette>(out var vignette))
             {
                 //vignette.color = 
                 vignette.active = true;
-                vignette.color.value = vignetteColor.value;
+                vignette.color.value = vignettePauseColor;
                 vignette.intensity.value = 7f;
             }
 
         }
         if (!playerScript.uiActive)
         {
-            if (vol.profile.TryGet<Vignette>(out var vignette))
+            if (volTrigger.vol.profile.TryGet<Vignette>(out var vignette))
             {
-                vignette.active = false;
+                vignette.color.value = vignetteColorOriginal;
+                vignette.intensity.value = originalIntensity;
+
+                //if player is dead or healthy
+                if (volTrigger.health.curHealth > 1 || volTrigger.health.curHealth <= .01)
+                {
+                    vignette.active = false;
+                }
             }
         }
     }

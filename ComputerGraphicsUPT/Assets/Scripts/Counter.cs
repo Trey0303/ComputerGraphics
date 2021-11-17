@@ -8,12 +8,14 @@ public class Counter : MonoBehaviour
     //active ingame
     public Text orangeText;
     public int orangeCount;
+    public int maxOrange = 39;
 
     public Text greenText;
     public int greenCount;
 
     public Text purpleText;
     public int purpleCount;
+    public int MaxPurple = 3;
 
 
     //paused game

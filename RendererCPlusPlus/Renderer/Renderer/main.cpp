@@ -322,7 +322,7 @@ int main() {
     shader multiColorShad = makeShader(colorVert, colorFrag);
 
     //loading shader
-    shader stdShad = loadShader("res\\mvp.vert", "res\\mvp.frag");
+    shader stdShad = loadShader("res\\pointLight.vert", "res\\pointLight.frag");
 
     //loading textures
     texture checker = loadTexture("res\\uvchecker.jpg");
@@ -347,6 +347,10 @@ int main() {
     glm::vec3 ambient(0.3f, 0.3f, 0.3f);
     glm::vec3 sunlight = glm::vec3(0, 0,-1);//directional light direction?
     glm::vec3 lightColor = glm::vec3(1, 1, 0);//directional light color
+    
+    //point light
+    glm::vec4 lightPos = glm::vec4(1, 1, 0 , 0);
+    float lightRadius = 7;
 
 
     // update-render loop
@@ -379,8 +383,12 @@ int main() {
         //uv
         setUniform(stdShad, 3, checker, 0); //albedo(main color)
         setUniform(stdShad, 4, ambient); //ambient light
-        setUniform(stdShad, 5, sunlight);//directional light
-        setUniform(stdShad, 6, lightColor);//directional light color
+        //setUniform(stdShad, 5, sunlight);//directional light
+        setUniform(stdShad, 6, lightColor);//light color
+        
+        //point light
+        setUniform(stdShad, 7, lightPos);//point light position
+        setUniform(stdShad, 8, lightRadius);//point light radius
 
         //draw Rectangle
         //draw(multiColorShad, basicRectangleGeo);

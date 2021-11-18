@@ -8,14 +8,14 @@ public class Counter : MonoBehaviour
     //active ingame
     public Text orangeText;
     public int orangeCount;
-    public int maxOrange = 39;
+    public int maxOrange = 51;
 
     public Text greenText;
     public int greenCount;
 
     public Text purpleText;
     public int purpleCount;
-    public int MaxPurple = 3;
+    public int maxPurple = 3;
 
 
     //paused game
@@ -30,7 +30,7 @@ public class Counter : MonoBehaviour
     void Start()
     {
         Data.MaxOrange = maxOrange;
-        Data.MaxPurple = MaxPurple;
+        Data.MaxPurple = maxPurple;
 
         //mytext.text = "0";
         orangeCount = 0;
@@ -41,7 +41,7 @@ public class Counter : MonoBehaviour
         greenText.text = "" + greenCount;
         purpleText.text = "" + purpleCount;
 
-        orangeTextPaused.text = "" + orangeCount;
+        orangeTextPaused.text = "" + orangeCount + " / " + maxOrange;
        // greenTextPaused.text = "" + greenCount;
         purpleTextPaused.text = "" + purpleCount;
 
@@ -56,9 +56,9 @@ public class Counter : MonoBehaviour
         greenText.text = "" + greenCount;
         purpleText.text = "" + purpleCount;
 
-        orangeTextPaused.text = "" + orangeCount;
+        orangeTextPaused.text = "" + orangeCount + " / " + maxOrange;
         //greenTextPaused.text = "" + greenCount;
-        purpleTextPaused.text = "" + purpleCount;
+        purpleTextPaused.text = "" + purpleCount + " / " + maxPurple;
     }
 
 }

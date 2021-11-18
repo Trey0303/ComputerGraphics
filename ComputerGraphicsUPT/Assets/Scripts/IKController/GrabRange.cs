@@ -29,7 +29,7 @@ public class GrabRange : MonoBehaviour
         {
             if (inRange)
             {
-                Debug.Log("Grab");
+                //Debug.Log("Grab");
                 //grab = true;
                 ikGrab.ikActive = true;
                 startTimer = true;
@@ -60,7 +60,7 @@ public class GrabRange : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("In grabbing range");
+            //Debug.Log("In grabbing range");
             inRange = true;
         
 

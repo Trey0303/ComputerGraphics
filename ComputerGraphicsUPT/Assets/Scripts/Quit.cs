@@ -13,10 +13,10 @@ public class Quit : MonoBehaviour
     private void Start()
     {
         //need to get values from counter script
-        Debug.Log("Data.OrangeItemCount " + Data.OrangeItemCount);
-        Debug.Log("Data.MaxOrange " + Data.MaxOrange);
-        Debug.Log("Data.PurpleItemCount " + Data.PurpleItemCount);
-        Debug.Log("Data.MaxPurple " + Data.MaxPurple);
+        //Debug.Log("Data.OrangeItemCount " + Data.OrangeItemCount);
+        //Debug.Log("Data.MaxOrange " + Data.MaxOrange);
+        //Debug.Log("Data.PurpleItemCount " + Data.PurpleItemCount);
+        //Debug.Log("Data.MaxPurple " + Data.MaxPurple);
 
         //finished/complete versions on end screen depending on player collecting everything or not
         if (Data.OrangeItemCount == Data.MaxOrange && Data.PurpleItemCount == Data.MaxPurple)

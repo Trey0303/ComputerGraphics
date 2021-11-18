@@ -35,7 +35,7 @@ public class pauseMenuColor : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<SamplePlayerCharacter>();
 
-        vignettePauseColor = Color.blue;
+        vignettePauseColor = new Color(0.3f, 0.4f, 0.6f);
         if (volTrigger.vol.profile.TryGet<Vignette>(out var vignette))
         {
             vignetteColorOriginal = vignette.color.value;
@@ -59,7 +59,7 @@ public class pauseMenuColor : MonoBehaviour
                 //vignette.color = 
                 vignette.active = true;
                 vignette.color.value = vignettePauseColor;
-                vignette.intensity.value = 7f;
+                vignette.intensity.value = .8f;
             }
 
         }

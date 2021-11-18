@@ -29,6 +29,9 @@ public class Counter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Data.MaxOrange = maxOrange;
+        Data.MaxPurple = MaxPurple;
+
         //mytext.text = "0";
         orangeCount = 0;
         greenCount = 0;

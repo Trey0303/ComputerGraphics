@@ -6,16 +6,20 @@ using UnityEngine.UI;
 
 public class Quit : MonoBehaviour
 {
-    public Counter counter;
+    //public Counter counter;
     public Text complete;
     public Text finished;
 
     private void Start()
     {
         //need to get values from counter script
+        Debug.Log("Data.OrangeItemCount " + Data.OrangeItemCount);
+        Debug.Log("Data.MaxOrange " + Data.MaxOrange);
+        Debug.Log("Data.PurpleItemCount " + Data.PurpleItemCount);
+        Debug.Log("Data.MaxPurple " + Data.MaxPurple);
 
         //finished/complete versions on end screen depending on player collecting everything or not
-        if(counter.orangeCount == counter.maxOrange && counter.purpleCount == counter.MaxPurple)
+        if (Data.OrangeItemCount == Data.MaxOrange && Data.PurpleItemCount == Data.MaxPurple)
         {
             //if all orange and purple items collected display Complete
             complete.enabled = true;

@@ -23,18 +23,24 @@ public class Pickup : MonoBehaviour
             {
                 //Debug.Log("Orange");
                 countItem.orangeCount++;
+                Data.OrangeItemCount = countItem.orangeCount;
+                
                 Destroy(gameObject);
             }
             if (gameObject.tag == "Green")
             {
                 //Debug.Log("Green");
                 countItem.greenCount++;
+                Data.GreenItemCount = countItem.greenCount;
+
                 Destroy(gameObject);
             }
             if (gameObject.tag == "Purple")
             {
                 //Debug.Log("Purple");
                 countItem.purpleCount++;
+                Data.PurpleItemCount = countItem.purpleCount;
+
                 Destroy(gameObject);
             }
         }

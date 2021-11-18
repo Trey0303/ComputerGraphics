@@ -11,7 +11,7 @@ public class DamageCollision : MonoBehaviour
 //      (edit > project settings > physics > contact pairs mode)
     private void OnCollisionEnter(Collision other)
     {
-            Debug.Log("touched spikes");
+            //Debug.Log("touched spikes");
         if (other.gameObject.tag == "Player")
         {
 

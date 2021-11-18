@@ -94,7 +94,25 @@ namespace aie
         glShaderSource(frag, 1, &fragSource, 0);
         // compile shaders
         glCompileShader(vert);
+        GLint vertCompiled;
+        glGetShaderiv(vert, GL_COMPILE_STATUS, &vertCompiled);
+        if (vertCompiled != true) {
+            GLsizei log_length = 0;
+            GLchar message[1024];
+            glGetShaderInfoLog(vert, 1024, &log_length, message);
+            std::cout << message << std::endl;
+        }
+
         glCompileShader(frag);
+        GLint fragCompiled;
+        glGetShaderiv(frag, GL_COMPILE_STATUS, &fragCompiled);
+        if (fragCompiled != true) {
+            GLsizei log_length = 0;
+            GLchar message[1024];
+            glGetShaderInfoLog(frag, 1024, &log_length, message);
+            std::cout << message << std::endl;
+        }
+
 
         //attach the shaders to the shader program
         glAttachShader(newShad.program, vert);

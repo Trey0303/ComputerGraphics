@@ -149,7 +149,7 @@ public class SamplePlayerCharacter : MonoBehaviour
             anims.SetFloat("LocalVelX", localDirection.x);
             anims.SetFloat("LocalVelZ", localDirection.z);
             anims.SetBool("Dance", dance);
-
+            anims.SetBool("Swimming", Data.IsSwimming);
 
 
         }

@@ -383,7 +383,7 @@ int main() {
         //uv
         setUniform(stdShad, 3, checker, 0); //albedo(main color)
         setUniform(stdShad, 4, ambient); //ambient light
-        //setUniform(stdShad, 5, sunlight);//directional light
+        setUniform(stdShad, 5, sunlight);//directional light
         setUniform(stdShad, 6, lightColor);//light color
         
         //point light

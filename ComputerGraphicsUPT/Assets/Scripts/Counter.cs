@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Counter : MonoBehaviour
 {
+    public Health health;
+
     //active ingame
     public Text orangeText;
     public int orangeCount;
@@ -12,6 +14,7 @@ public class Counter : MonoBehaviour
 
     public Text greenText;
     public int greenCount;
+    public int maxGreen = 50;
 
     public Text purpleText;
     public int purpleCount;
@@ -31,6 +34,7 @@ public class Counter : MonoBehaviour
     {
         Data.MaxOrange = maxOrange;
         Data.MaxPurple = maxPurple;
+        Data.MaxGreen = maxGreen;
 
         //mytext.text = "0";
         orangeCount = 0;
@@ -59,6 +63,18 @@ public class Counter : MonoBehaviour
         orangeTextPaused.text = "" + orangeCount + " / " + maxOrange;
         //greenTextPaused.text = "" + greenCount;
         purpleTextPaused.text = "" + purpleCount + " / " + maxPurple;
+
+        //when player has less than max health
+        //if(health.curHealth < )
+        
+        //and player has enough green
+        if (greenCount == maxGreen)
+        {
+            //heal player by 1
+            health.Heal();
+
+            greenCount = Data.GreenItemCount;
+        }
     }
 
 }

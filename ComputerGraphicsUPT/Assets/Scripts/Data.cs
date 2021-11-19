@@ -14,5 +14,7 @@ public static class Data
 
     public static int MaxPurple { get; set; }
 
+    public static int MaxGreen { get; set; }
+
     public static bool IsSwimming { get; set; }
 }

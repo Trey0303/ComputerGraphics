@@ -64,6 +64,29 @@ public class Health : MonoBehaviour
 
     }
 
+    public void Dead()
+    {
+        //set player back to full health 
+        curHealth = curHealth + 3;
+        OnHealthChanged.Invoke(curHealth);
+
+        //reset player at spawn position
+
+    }
+
+    public void Heal()
+    {
+        
+        //subtract amount of green used from total green player has
+        Data.GreenItemCount = Data.GreenItemCount - Data.MaxGreen;
+
+        curHealth++;
+
+        OnHealthChanged.Invoke(curHealth);
+
+
+    }
+
     public void UpdateHealth(float health)
     {
         healthBar.value = health;

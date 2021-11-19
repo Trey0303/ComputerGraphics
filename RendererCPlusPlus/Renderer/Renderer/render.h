@@ -61,6 +61,9 @@ namespace aie
 
     void setUniform(const shader& shad, GLuint location, const glm::vec3& value);
 
+    //vec4
+    void setUniform(const shader& shad, GLuint location, const glm::vec4& value);
+
     //set float
     void setUniform(const shader& shad, GLuint location, const float& value);
 

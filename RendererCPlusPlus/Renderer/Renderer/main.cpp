@@ -240,27 +240,27 @@ int main() {
             {-1 ,0 , 1} //normal
         },
         //bot
-        {//vertex 20 - bottom left
+        {//vertex 20 - bottom left b
 
             {-.5f,-.5f,-1,1},//vertex 0 position
             {1, 0, 0, 1},//color
             {0.0f,0.0f},//uv
             {0.0f ,-1.0f , 1.0f} //normal
         },
-        {//vertex 21 - bottom right
+        {//vertex 21 - bottom right b
             {.5f,-.5f,-1,1},//vertex 1 position
             {0, 1, 0, 1},//color
             {1.0f,0.0f},//uv
             {0 ,-1 , 1} //normal
         },
-        {//vertex 22 - bottom left
+        {//vertex 22 - bottom left f
 
             {-.5f,-.5f,0,1},//vertex 0 position
             {1, 0, 0, 1},//color
             {0.0f,1.0f},//uv
             {0.0f ,-1.0f , 1.0f} //normal
         },
-        {//vertex 23 - bottom right
+        {//vertex 23 - bottom right f
             {.5f,-.5f,0,1},//vertex 1 position
             {0, 1, 0, 1},//color
             {1.0f,1.0f},//uv
@@ -330,7 +330,7 @@ int main() {
     //transform
     transform tri_default;
     transform tri_trans;
-    tri_trans.localPos = glm::vec3(.5, 0, 0);
+    tri_trans.localPos = glm::vec3(.5, 1, 0);
     tri_trans.localRot = glm::angleAxis(45.0f, glm::vec3(0, 0, 1));
     tri_trans.localScl = glm::vec3(2, 2, 2);
 
@@ -349,7 +349,7 @@ int main() {
     glm::vec3 lightColor = glm::vec3(1, 1, 0);//directional light color
     
     //point light
-    glm::vec4 lightPos = glm::vec4(1, 1, 0 , 0);
+    glm::vec4 lightPos = glm::vec4(0, 0, .5 , 0);
     float lightRadius = 7;
 
 

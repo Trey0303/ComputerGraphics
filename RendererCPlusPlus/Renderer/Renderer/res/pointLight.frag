@@ -30,26 +30,19 @@ void main()
     vec4 distance = worldPos - lightPosition;
 
     //get the length from distance
-    float distanceIntoLength = length(distance);
+    float d = length(distance);
 
-    float d = -1.0f;
-
-    //see if object is within light radius
-    if(distanceIntoLength < lightRadius) {
-        //light up object by certain amount
-        d = 1.0f;
-    }
-    else {
-        d = 0.0f;
-    }
-
+    float attenuation = clamp(10.0f / d, 0.0, 1.0);
+ 
     //diffuse = dot product * light color
-    vec3 diffuse = d * lightColor;
+    vec3 dirToLight = normalize(lightPosition.xyz - worldPos.xyz);
+    vec3 diffuse = max(0, dot(vNormal, dirToLight)) * lightColor;
 
     //gets the objects texture
     vec4 base = texture(albedo, vUV);
 
     //combines and outputs added light
-    fragColor.rgb = base.rgb * (ambientLightColor + diffuse);
+    fragColor.rgb = attenuation * (base.rgb * (ambientLightColor + diffuse));
+    //fragColor.rgb = attenuation * diffuse;
     fragColor.a = base.a;
 };

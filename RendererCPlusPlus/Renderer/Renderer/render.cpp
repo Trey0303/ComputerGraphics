@@ -250,6 +250,11 @@ namespace aie
         glProgramUniform3fv(shad.program, location, 1, glm::value_ptr(value));
     }
 
+    void setUniform(const shader& shad, GLuint location, const glm::vec4& value)
+    {
+        glProgramUniform4fv(shad.program, location, 1, glm::value_ptr(value));
+    }
+
     void setUniform(const shader& shad, GLuint location,const float& value)
     {
         glProgramUniform1fv(shad.program, location, 1, &value);

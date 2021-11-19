@@ -24,6 +24,8 @@ Unity c#(computerGraphicsUPT):
 -space bar: jump
 -e: interact
 -esc: pause game
+-t: dance
+-left mouse click: pause menu tabs
 				
 
 License:

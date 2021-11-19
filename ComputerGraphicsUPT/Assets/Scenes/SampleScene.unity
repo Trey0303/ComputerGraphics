@@ -4566,7 +4566,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0.18
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -21236,7 +21236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16.27, y: 0}
+  m_AnchoredPosition: {x: -16.269531, y: 0}
   m_SizeDelta: {x: 174, y: 87.8}
   m_Pivot: {x: 1, y: 1}
 --- !u!1001 &784595238

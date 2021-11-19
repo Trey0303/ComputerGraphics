@@ -18,7 +18,7 @@ public class Swimming : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Data.IsSwimming = true;
+            StoreData.IsSwimming = true;
         }
     }
 
@@ -26,7 +26,7 @@ public class Swimming : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Data.IsSwimming = false;
+            StoreData.IsSwimming = false;
         }
     }
 }

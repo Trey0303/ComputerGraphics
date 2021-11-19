@@ -16,6 +16,7 @@ public class ParticlePointAttractor : MonoBehaviour
     public float radius = 1;
 
     // Start is called before the first frame update
+    [System.Obsolete]
     void Start()
     {
         particles = new ParticleSystem.Particle[parSystem.maxParticles];

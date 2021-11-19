@@ -7,24 +7,23 @@ public class Counter : MonoBehaviour
 {
     public Health health;
 
+    float maxHealth;
+
     //active ingame
     public Text orangeText;
     public int orangeCount;
-    public int maxOrange = 51;
 
     public Text greenText;
     public int greenCount;
-    public int maxGreen = 50;
 
     public Text purpleText;
     public int purpleCount;
-    public int maxPurple = 3;
 
 
     //paused game
     public Text orangeTextPaused;
 
-   // public Text greenTextPaused;
+   //// public Text greenTextPaused;
 
     public Text purpleTextPaused;
 
@@ -32,49 +31,46 @@ public class Counter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Data.MaxOrange = maxOrange;
-        Data.MaxPurple = maxPurple;
-        Data.MaxGreen = maxGreen;
+        StoreData.MaxOrange = 52;
+        StoreData.MaxPurple = 3;
+        StoreData.MaxGreen = 10;
 
-        //mytext.text = "0";
-        orangeCount = 0;
-        greenCount = 0;
-        purpleCount = 0;
+        maxHealth = health.curHealth;
 
-        orangeText.text = "" + orangeCount;
-        greenText.text = "" + greenCount;
-        purpleText.text = "" + purpleCount;
+        orangeText.text = "" + StoreData.OrangeItemCount;
+        greenText.text = "" + StoreData.GreenItemCount;
+        purpleText.text = "" + StoreData.PurpleItemCount;
 
-        orangeTextPaused.text = "" + orangeCount + " / " + maxOrange;
+        orangeTextPaused.text = "" + StoreData.OrangeItemCount + " / " + StoreData.MaxOrange;
        // greenTextPaused.text = "" + greenCount;
-        purpleTextPaused.text = "" + purpleCount;
+        purpleTextPaused.text = "" + StoreData.PurpleItemCount + " / " + StoreData.MaxPurple;
 
-        //gridWidth = mytext.GetComponent<RectTransform>().sizeDelta.x;
-        //gridHeight = mytext.GetComponent<RectTransform>().sizeDelta.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        orangeText.text = "" + orangeCount;
-        greenText.text = "" + greenCount;
-        purpleText.text = "" + purpleCount;
+        orangeText.text = "" + StoreData.OrangeItemCount;
+        greenText.text = "" + StoreData.GreenItemCount;
+        purpleText.text = "" + StoreData.PurpleItemCount;
 
-        orangeTextPaused.text = "" + orangeCount + " / " + maxOrange;
-        //greenTextPaused.text = "" + greenCount;
-        purpleTextPaused.text = "" + purpleCount + " / " + maxPurple;
+        orangeTextPaused.text = "" + StoreData.OrangeItemCount + " / " + StoreData.MaxOrange;
+        purpleTextPaused.text = "" + StoreData.PurpleItemCount + " / " + StoreData.MaxPurple;
 
         //when player has less than max health
-        //if(health.curHealth < )
-        
-        //and player has enough green
-        if (greenCount == maxGreen)
+        if (health.curHealth < maxHealth)
         {
-            //heal player by 1
-            health.Heal();
+            //and player has enough green
+            if (StoreData.GreenItemCount == StoreData.MaxGreen)
+            {
+                //heal player by 1
+                health.Heal();
 
-            greenCount = Data.GreenItemCount;
+                greenCount = StoreData.GreenItemCount;
+            }
+
         }
+        
     }
 
 }

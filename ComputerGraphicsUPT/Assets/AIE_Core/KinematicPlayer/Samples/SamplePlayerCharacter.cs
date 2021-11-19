@@ -14,6 +14,8 @@ public class SamplePlayerCharacter : MonoBehaviour
 
     public GameObject ui;
 
+    public ActiveUI activeUI;
+
     private GrabRange grabRange;
 
     // The motor we're controlling
@@ -32,7 +34,7 @@ public class SamplePlayerCharacter : MonoBehaviour
 
     public bool uiActive = false;
 
-
+    [Obsolete]
     void Start()
     {
         if (ui != null)
@@ -134,10 +136,12 @@ public class SamplePlayerCharacter : MonoBehaviour
             if (uiActive == false)//resumeGame
             {
                 Time.timeScale = 1;
+                activeUI.show = true;
             }
             else//pauseGame
             {
                 Time.timeScale = 0;
+                activeUI.hide = true;
             }
         }
 
@@ -149,7 +153,7 @@ public class SamplePlayerCharacter : MonoBehaviour
             anims.SetFloat("LocalVelX", localDirection.x);
             anims.SetFloat("LocalVelZ", localDirection.z);
             anims.SetBool("Dance", dance);
-            anims.SetBool("Swimming", Data.IsSwimming);
+            //anims.SetBool("Swimming", Data.IsSwimming);
 
 
         }

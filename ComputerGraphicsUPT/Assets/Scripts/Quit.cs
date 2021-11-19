@@ -19,16 +19,20 @@ public class Quit : MonoBehaviour
         //Debug.Log("Data.MaxPurple " + Data.MaxPurple);
 
         //finished/complete versions on end screen depending on player collecting everything or not
-        if (Data.OrangeItemCount == Data.MaxOrange && Data.PurpleItemCount == Data.MaxPurple)
+        if(complete != null && finished != null)
         {
-            //if all orange and purple items collected display Complete
-            complete.enabled = true;
-            finished.enabled = false;
-        }
-        else//if player did NOT collect all orange and purple items then display Finished
-        {
-            finished.enabled = true;
-            complete.enabled = false;
+            if (StoreData.OrangeItemCount == StoreData.MaxOrange && StoreData.PurpleItemCount == StoreData.MaxPurple)
+            {
+                //if all orange and purple items collected display Complete
+                complete.enabled = true;
+                finished.enabled = false;
+            }
+            else//if player did NOT collect all orange and purple items then display Finished
+            {
+                finished.enabled = true;
+                complete.enabled = false;
+            }
+
         }
     }
     
@@ -45,7 +49,12 @@ public class Quit : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Return))//Enter Key(NOT num Enter)
         {
-            SceneManager.LoadScene(0);
+            StoreData.OrangeItemCount = 0;
+            StoreData.PurpleItemCount = 0;
+            StoreData.GreenItemCount = 0;
+            StoreData.OrangeComplete = false;
+            StoreData.PurpleComplete = false;
+            SceneManager.LoadScene(1);
         }
     }
 }

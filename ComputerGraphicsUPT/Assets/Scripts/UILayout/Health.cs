@@ -11,6 +11,10 @@ public class UnityEventFloat : UnityEvent<float> { }
 
 public class Health : MonoBehaviour
 {
+    public Transform playerTransform;
+
+    public Transform spawnPoint;
+
     public Slider healthBar;
     //[Range(0, 3)]
     public float curHealth = 3;//set a seperate float from the healtbar
@@ -26,7 +30,10 @@ public class Health : MonoBehaviour
     {
         OnHealthChanged.AddListener(UpdateHealth);//updates healthbar with new value
         setBackTime = invincibilityTime;
-        
+
+        playerTransform = GameObject.Find("Player").transform;
+
+        spawnPoint = GameObject.Find("SpawnPoint").transform;
     }
 
     private void Update()
@@ -44,6 +51,11 @@ public class Health : MonoBehaviour
                 invincibilityTime = setBackTime;
                 invincible = false;
             }
+        }
+
+        if(curHealth <= 0)
+        {
+            Dead();
         }
 
     }
@@ -70,15 +82,22 @@ public class Health : MonoBehaviour
         curHealth = curHealth + 3;
         OnHealthChanged.Invoke(curHealth);
 
-        //reset player at spawn position
+        StoreData.GreenItemCount = 0;
 
+        //reset player at spawn position
+        GameObject.Find("Player").GetComponent<SamplePlayerCharacter>().enabled = false;
+        //GameObject.Find("Player").GetComponent<Rigidbody>().detectCollisions = false;
+        playerTransform.position = spawnPoint.position;
+        playerTransform.rotation = spawnPoint.rotation;
+        //GameObject.Find("Player").GetComponent<Rigidbody>().detectCollisions = true;
+        GameObject.Find("Player").GetComponent<SamplePlayerCharacter>().enabled = true;
     }
 
     public void Heal()
     {
         
         //subtract amount of green used from total green player has
-        Data.GreenItemCount = Data.GreenItemCount - Data.MaxGreen;
+        StoreData.GreenItemCount = StoreData.GreenItemCount - StoreData.MaxGreen;
 
         curHealth++;
 

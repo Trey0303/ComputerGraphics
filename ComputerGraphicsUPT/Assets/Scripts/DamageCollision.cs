@@ -9,10 +9,10 @@ public class DamageCollision : MonoBehaviour
 
 //note: have to enable contact pairs for kinematic to static in project settings
 //      (edit > project settings > physics > contact pairs mode)
-    private void OnCollisionEnter(Collision other)
+
+    private void OnCollisionStay(Collision collision)
     {
-            //Debug.Log("touched spikes");
-        if (other.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
 
             //Debug.Log("player takes damage");

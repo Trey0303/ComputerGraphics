@@ -6,6 +6,7 @@ public class Pickup : MonoBehaviour
 {
     public GameObject ui;
     public Counter countItem;
+    //public ActiveUI activeUI;
 
 
     private void Start()
@@ -22,24 +23,32 @@ public class Pickup : MonoBehaviour
             if (gameObject.tag == "Orange")
             {
                 //Debug.Log("Orange");
-                countItem.orangeCount++;
-                Data.OrangeItemCount = countItem.orangeCount;
-                
+                //countItem.orangeCount++;
+                StoreData.OrangeItemCount++;
+                StoreData.ShowOrange = true;
+                StoreData.OrangeTimer = 1;
+
                 Destroy(gameObject);
             }
             if (gameObject.tag == "Green")
             {
                 //Debug.Log("Green");
-                countItem.greenCount++;
-                Data.GreenItemCount = countItem.greenCount;
+                if(StoreData.GreenItemCount < StoreData.MaxGreen)
+                {
+                    //countItem.greenCount++;
+                    StoreData.GreenItemCount++;
+
+                }
 
                 Destroy(gameObject);
             }
             if (gameObject.tag == "Purple")
             {
                 //Debug.Log("Purple");
-                countItem.purpleCount++;
-                Data.PurpleItemCount = countItem.purpleCount;
+                //countItem.purpleCount++;
+                StoreData.PurpleItemCount++;
+                StoreData.ShowPurple = true;
+                StoreData.PurpleTimer = 1;
 
                 Destroy(gameObject);
             }

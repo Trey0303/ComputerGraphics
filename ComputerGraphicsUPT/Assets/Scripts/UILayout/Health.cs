@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
     //[Range(0, 3)]
     public float curHealth = 3;//set a seperate float from the healtbar
     bool invincible = false;
-    public float invincibilityTime = 2;
+    public float invincibilityTime = 1.5f;
     private float setBackTime = 0;
 
 
@@ -41,9 +41,12 @@ public class Health : MonoBehaviour
         if (invincible)
         {
             invincibilityTime -= Time.deltaTime;
+            GameObject.Find("DummyMesh").GetComponent<SkinnedMeshRenderer>().enabled = !GameObject.Find("DummyMesh").GetComponent<SkinnedMeshRenderer>().enabled;
+
             if (invincibilityTime <= 0){
                 invincibilityTime = setBackTime;
                 invincible = false;
+                GameObject.Find("DummyMesh").GetComponent<SkinnedMeshRenderer>().enabled = true;
             }
         }
 
@@ -73,6 +76,7 @@ public class Health : MonoBehaviour
         //set player back to full health 
         Heal(3);
         OnHealthChanged.Invoke(curHealth);
+        invincibilityTime = 0;
 
         StoreData.GreenItemCount = 0;
 

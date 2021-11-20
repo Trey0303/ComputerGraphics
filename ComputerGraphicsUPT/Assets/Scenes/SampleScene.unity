@@ -27269,7 +27269,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 0}
   healthBar: {fileID: 779031869}
   curHealth: 3
-  invincibilityTime: 2
+  invincibilityTime: 1.5
 --- !u!114 &1066534391
 MonoBehaviour:
   m_ObjectHideFlags: 0

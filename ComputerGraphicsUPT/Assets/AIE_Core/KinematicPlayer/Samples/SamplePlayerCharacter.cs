@@ -16,17 +16,12 @@ public class SamplePlayerCharacter : MonoBehaviour
 
     public ActiveUI activeUI;
 
-    private GrabRange grabRange;
-
     // The motor we're controlling
     public KinematicPlayerMotor motor;
 
     public Animator anims;
 
     public Rigidbody rb;
-
-    //public float speed = 0;
-    //public float maxSpeed = 2;
 
     public float maxTurnRate = 8;
 
@@ -118,14 +113,6 @@ public class SamplePlayerCharacter : MonoBehaviour
                 }
             }
         }
-
-        //if (uiActive == true)//if game IS paused
-        //{
-        //    if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A))
-        //    {
-
-        //    }
-        //}
 
         //pause menu
         if (Input.GetKeyDown(KeyCode.Escape))

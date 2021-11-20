@@ -38,12 +38,6 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-            
-        //        TakeDamage(1);
-
-        //}
         if (invincible)
         {
             invincibilityTime -= Time.deltaTime;
@@ -65,8 +59,6 @@ public class Health : MonoBehaviour
     {
         if (!invincible)
         {
-            //Debug.Log("took damage");
-            //Debug.Log("Damage: " + (damage));
             curHealth = curHealth - damage;
             // invoke the event with the health taken
             OnHealthChanged.Invoke(curHealth);//tells OnHealthChange that a change to curHealth has occured
@@ -86,10 +78,8 @@ public class Health : MonoBehaviour
 
         //reset player at spawn position
         GameObject.Find("Player").GetComponent<SamplePlayerCharacter>().enabled = false;
-        //GameObject.Find("Player").GetComponent<Rigidbody>().detectCollisions = false;
         playerTransform.position = spawnPoint.position;
         playerTransform.rotation = spawnPoint.rotation;
-        //GameObject.Find("Player").GetComponent<Rigidbody>().detectCollisions = true;
         GameObject.Find("Player").GetComponent<SamplePlayerCharacter>().enabled = true;
     }
 

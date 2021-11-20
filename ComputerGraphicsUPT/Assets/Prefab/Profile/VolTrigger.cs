@@ -55,7 +55,6 @@ public class VolTrigger : MonoBehaviour
     {
         if (volTrigger.tag == "Bloom")
         {
-            //Debug.Log("Bloom");
             if (vol.profile.TryGet<Bloom>(out var bloom))
             {
                 bloom.active = true;
@@ -64,7 +63,6 @@ public class VolTrigger : MonoBehaviour
         }
         if (volTrigger.tag == "MotionBlur")
         {
-            //Debug.Log("MotionBlur");
             if (vol.profile.TryGet<MotionBlur>(out var motionBlur))
             {
                 motionBlur.active = true;
@@ -72,7 +70,6 @@ public class VolTrigger : MonoBehaviour
         }
         if (volTrigger.tag == "DepthOfField")
         {
-            //Debug.Log("DepthOfField");
             if (vol.profile.TryGet<DepthOfField>(out var depthOfField))
             {
                 depthOfField.active = true;
@@ -85,7 +82,6 @@ public class VolTrigger : MonoBehaviour
     {
         if (volTrigger.tag == "Bloom")
         {
-            //Debug.Log("Bloom");
             if (vol.profile.TryGet<Bloom>(out var bloom))
             {
                 bloom.active = false;
@@ -94,7 +90,6 @@ public class VolTrigger : MonoBehaviour
         }
         if (volTrigger.tag == "MotionBlur")
         {
-            //Debug.Log("MotionBlur");
             if (vol.profile.TryGet<MotionBlur>(out var motionBlur))
             {
                 motionBlur.active = false;
@@ -102,17 +97,10 @@ public class VolTrigger : MonoBehaviour
         }
         if (volTrigger.tag == "DepthOfField")
         {
-            //Debug.Log("DepthOfField");
             if (vol.profile.TryGet<DepthOfField>(out var depthOfField))
             {
                 depthOfField.active = false;
             }
         }
     }
-
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawWireCube(transform.position, transform.localScale);
-    //}
 }

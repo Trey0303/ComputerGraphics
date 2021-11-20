@@ -9,11 +9,9 @@ public class TabGroup : MonoBehaviour
 {
     public GameObject[] panels;
     public Button[] buttons;
-    //int[] arPanels;
-    //int panel;
-    //int curTab = 0;
+
     int lastTab = 0;
-    //int buttonIndex = 0;
+
 
     private void Start()
     {

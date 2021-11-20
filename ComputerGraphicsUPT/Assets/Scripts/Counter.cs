@@ -42,7 +42,6 @@ public class Counter : MonoBehaviour
         purpleText.text = "" + StoreData.PurpleItemCount;
 
         orangeTextPaused.text = "" + StoreData.OrangeItemCount + " / " + StoreData.MaxOrange;
-       // greenTextPaused.text = "" + greenCount;
         purpleTextPaused.text = "" + StoreData.PurpleItemCount + " / " + StoreData.MaxPurple;
 
     }

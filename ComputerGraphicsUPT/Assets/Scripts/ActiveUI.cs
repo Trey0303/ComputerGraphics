@@ -49,15 +49,6 @@ public class ActiveUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (canPauseExit)
-        //{
-        //    Debug.Log("?????");
-        //    if (Input.GetKeyDown(KeyCode.Tab))
-        //    {
-        //        Debug.Log("BACK");
-        //        SceneManager.LoadScene(0);
-        //    }
-        //}
         if (show)
         {
             for (int i = 0; i < activeUI.Length; i++)
@@ -65,7 +56,6 @@ public class ActiveUI : MonoBehaviour
                 activeUI[i].SetActive(true);
 
             }
-            //canPauseExit = true;
             show = false;
         }
         if (hide)
@@ -73,7 +63,6 @@ public class ActiveUI : MonoBehaviour
             for (int i = 0; i < activeUI.Length; i++)
             {
                 activeUI[i].SetActive(false);
-                //canPauseExit = false;
 
             }
             hide = false;
@@ -98,7 +87,6 @@ public class ActiveUI : MonoBehaviour
         {
             if (StoreData.PurpleItemCount == StoreData.MaxPurple)
             {
-                //Debug.Log("PurpleComplete");
                 StartCoroutine(PurpleComplete());
 
             }

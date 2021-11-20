@@ -20,16 +20,11 @@ public class GrabRange : MonoBehaviour
 
     void Update()
     {
-        
-            
-        
-
         //ObjectGrabRange(transform.position, 1);
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (inRange)
             {
-                //Debug.Log("Grab");
                 //grab = true;
                 ikGrab.ikActive = true;
                 startTimer = true;
@@ -42,7 +37,6 @@ public class GrabRange : MonoBehaviour
         {
             count += Time.deltaTime;
             timer = Mathf.FloorToInt(count % 60);
-            //Debug.Log(timer);
             if (count >= .3)
             {
 

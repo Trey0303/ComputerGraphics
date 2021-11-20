@@ -7,9 +7,7 @@ public class IKHead : MonoBehaviour
     protected Animator animator;
 
     public bool ikActive = false;
-    //public Transform headObj = null;
     public Transform lookObj = null;
-    //private bool inRange;
 
     void Start()
     {
@@ -21,7 +19,6 @@ public class IKHead : MonoBehaviour
     {
         if (animator)
         {
-
             //if the IK is active, set the position and rotation directly to the goal. 
             if (ikActive)
             {
@@ -32,7 +29,7 @@ public class IKHead : MonoBehaviour
                     animator.SetLookAtWeight(1);
                     animator.SetLookAtPosition(lookObj.position);
                 }
-
+                 
             }
         }
     }
@@ -42,8 +39,6 @@ public class IKHead : MonoBehaviour
         //Debug.Log("in range");
         if(other.gameObject.tag == "Look")
         {
-            //Debug.Log("Look");
-            //inRange = true;
             lookObj = other.transform.GetChild(0);
             ikActive = true;
 
@@ -54,7 +49,6 @@ public class IKHead : MonoBehaviour
     {
         if (other.gameObject.tag == "Look")
         {
-            //inRange = false;
             lookObj = null;
             ikActive = false;
 

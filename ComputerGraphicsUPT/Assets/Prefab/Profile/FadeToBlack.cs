@@ -68,12 +68,10 @@ public class FadeToBlack : MonoBehaviour
         {
 
             adj.postExposure.value -= Time.deltaTime * fadeSpeed;
-            //Debug.Log(adj.postExposure.value);
 
             if (adj.postExposure.value <= -13f)
             {
                 fadeOut = true;
-                //Debug.Log(fadeOut);
             }
         }
     }
@@ -82,7 +80,6 @@ public class FadeToBlack : MonoBehaviour
         if (vol.profile.TryGet<ColorAdjustments>(out var adj))
         {
             adj.postExposure.value += Time.deltaTime * fadeSpeed;
-            //Debug.Log(adj.postExposure.value);
 
             if (adj.postExposure.value > 0)
             {

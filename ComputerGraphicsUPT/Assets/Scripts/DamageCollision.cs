@@ -15,9 +15,8 @@ public class DamageCollision : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
 
-            //Debug.Log("player takes damage");
             health.TakeDamage(1);
-
+             
         }
     }
 }

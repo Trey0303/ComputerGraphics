@@ -32,6 +32,7 @@ public class SamplePlayerCharacter : MonoBehaviour
     [Obsolete]
     void Start()
     {
+
         if (ui != null)
         {
             ui.SetActive(uiActive);

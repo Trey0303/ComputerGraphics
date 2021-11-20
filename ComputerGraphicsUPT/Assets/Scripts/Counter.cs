@@ -64,7 +64,7 @@ public class Counter : MonoBehaviour
             if (StoreData.GreenItemCount == StoreData.MaxGreen)
             {
                 //heal player by 1
-                health.Heal();
+                health.Heal(1);
 
                 greenCount = StoreData.GreenItemCount;
             }

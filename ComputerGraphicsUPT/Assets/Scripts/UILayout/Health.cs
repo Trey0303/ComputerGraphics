@@ -79,7 +79,7 @@ public class Health : MonoBehaviour
     public void Dead()
     {
         //set player back to full health 
-        curHealth = curHealth + 3;
+        Heal(3);
         OnHealthChanged.Invoke(curHealth);
 
         StoreData.GreenItemCount = 0;
@@ -93,13 +93,13 @@ public class Health : MonoBehaviour
         GameObject.Find("Player").GetComponent<SamplePlayerCharacter>().enabled = true;
     }
 
-    public void Heal()
+    public void Heal(float amount)
     {
         
         //subtract amount of green used from total green player has
         StoreData.GreenItemCount = StoreData.GreenItemCount - StoreData.MaxGreen;
 
-        curHealth++;
+        curHealth = curHealth + amount;
 
         OnHealthChanged.Invoke(curHealth);
 
